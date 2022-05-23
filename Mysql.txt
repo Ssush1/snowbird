@@ -1,0 +1,108 @@
+ Database Agileprom;
+
+/******************************************************************************************/
+/* Table creations */
+
+CREATE TABLE tblUserRoles (
+    id INT NOT NULL AUTO_INCREMENT,
+    txtUserRole VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+/*********************************************************************************************/
+
+
+CREATE TABLE tblUsers (
+    id INT NOT NULL AUTO_INCREMENT,
+    txtUserName VARCHAR(50) NOT NULL,
+    txtPassword VARCHAR(50) NOT NULL,
+    refUserRole INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (refUserRole)
+        REFERENCES tbluserroles (id)
+);
+
+
+/************************************************************************************************/
+
+CREATE TABLE tblprojects (
+    id INT NOT NULL AUTO_INCREMENT,
+    txtName VARCHAR(50) NOT NULL,
+    txtType VARCHAR(50) NOT NULL,
+    refprojectOwner INT NOT NULL,
+    dtEstStartdate DATETIME,
+    dtEstEndDate DATETIME,
+    PRIMARY KEY (id),
+    FOREIGN KEY (refprojectOwner)
+        REFERENCES tblusers (id)
+);
+
+/*************************************************************************************************/
+
+CREATE TABLE tblepics (
+    id INT NOT NULL AUTO_INCREMENT,
+    refprojectid INT NOT NULL,
+    refAssignee INT,
+    txtTitle VARCHAR(50) NOT NULL,
+    txtDesc VARCHAR(150),
+    txtStatus VARCHAR(10) NOT NULL,
+    dtEstStartdate DATETIME,
+    dtestenddate DATETIME,
+    dtActstartdate DATETIME,
+    dtActenddate DATETIME,
+    PRIMARY KEY (id),
+    FOREIGN KEY (refprojectid)
+        REFERENCES tblprojects (id),
+    FOREIGN KEY (refAssignee)
+        REFERENCES tblusers (id)
+);
+
+/***********************************************************************************************************/
+
+CREATE TABLE tblSprints (
+    id INT NOT NULL AUTO_INCREMENT,
+    txtSprintName VARCHAR(50) NOT NULL,
+    dtEstStartDate DATETIME,
+    dtEstEndDate DATETIME,
+    dtActStartDate DATETIME,
+    dtActEndDate DATETIME,
+    PRIMARY KEY (id)
+);
+
+/*******************************************************************************************************************/
+
+CREATE TABLE tblTasks (
+    id INT NOT NULL AUTO_INCREMENT,
+    refEpicid INT NOT NULL,
+    refAssignee INT,
+    txtTitle VARCHAR(50) NOT NULL,
+    txtDescription VARCHAR(250),
+    txtStatus VARCHAR(10) NOT NULL,
+    refSprintid INT,
+    dtEstStartDate DATETIME,
+    dtEstEndDate DATETIME,
+    dtActStartDate DATETIME,
+    dtActEndDate DATETIME,
+    PRIMARY KEY (id),
+    FOREIGN KEY (refSprintid)
+        REFERENCES tblsprints (id),
+    FOREIGN KEY (refEpicid)
+        REFERENCES tblepic (id),
+    FOREIGN KEY (refAssignee)
+        REFERENCES tblusers (id)
+);
+
+/*********************************************************************************************************/
+CREATE TABLE tblLogs (
+    id INT NOT NULL AUTO_INCREMENT,
+    refTaskid INT NOT NULL,
+    txtStatus VARCHAR(10) NOT NULL,
+    refUser INT NOT NULL,
+    dtLoggedOn DATETIME NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (refTaskid)
+        REFERENCES tblTasks (id),
+    FOREIGN KEY (refUser)
+        REFERENCES tblusers (id)
+);
+/*****************************************************************************************************************/
