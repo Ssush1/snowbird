@@ -1,5 +1,54 @@
 import './style.css'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
+
+//1.create new-click-redirect to the add sprint page
+
+
+//2.inside button tag of "create new"
+
+//Onload list- fetch - display
+//No. of pages - current page
+
+//Page no.-click-current -task 3 & disable click on the current page
+
+//Row click - edit page//No. of pages - current page
+
+//Page no.-click-current -task 3 & disable click on the current page
+
+//Row click - edit page
+
+function handleClick(){
+   navigate("/EditSprint");
+}
+
 function Sprints() {
+  var url = "http://localhost:8000/fetchsprintlist";
+  axios.post(url, {
+    })
+  .then((response) => {
+    console.log(response);
+  }, (error) => {
+    console.log(error);
+  });
+  const navigate = useNavigate();
+
+   const count=10;
+   const [sprintarray,setsprintarray]= useState([
+    { Id: 1, name: 'sprint1', count },
+    { Id: 2, name: 'sprint2', count },
+    { Id: 3, name: 'sprint3', count },
+    { Id: 4, name: 'sprint4', count },
+    { Id: 5, name: 'sprint5', count },
+  ])
+   
+  // var request = {};
+  // var header = {};
+
   return (
     <div>
       <div className="outer">
@@ -24,24 +73,23 @@ function Sprints() {
           <div className="secondcolumn">
             <div className="prowone">
               <label>Sprints</label>
-              <button>Create New</button>
+              <button onClick= {handleClick}>Create New</button>
             </div>
             <div className="tablerow">
-              <table>
-                <thead>
-                  <th>#id</th>
+              
+                
+                  <th>id</th>
                   <th>Sprint name</th>
                   <th>Sprint owner</th>
-                </thead>
+                
+{sprintarray.map((item,index)=>{
+  return(
+    <>
+    <tr></tr>
 
-                <tbody>
-                  <tr>
-                    <td>1 </td>
-                    <td>Sprint1</td>
-                    <td>A</td>
-                  </tr>
-                </tbody>
-              </table>
+    </>
+  )
+})}   
               <div className="pbutton">
                 <button>1</button>
                 <button>2</button>

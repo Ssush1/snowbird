@@ -203,7 +203,7 @@ __________________________________________________
 .tablerow {
   border-top: 1px solid gray;
   width: 80%;
-
+padding: 10px;
   height: 60vh;
 }
 .tablerow th {
