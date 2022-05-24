@@ -18,19 +18,21 @@ import { useState, useEffect } from 'react'
 
 //Row click - edit page
 
-function handleClick() {
-  navigate('/EditSprint')
-}
 
 
 function Sprints() {
+
+  function handleClick() {
+    navigate('/EditSprint')
+  }
+  
   var url = 'http://localhost:8000/fetchsprintlist'
   var data = {}
   var header = {}
 
   axios.post(url,data,header).then(
-    (response.data) => {
-      console.log(response)
+    (response) => {
+      console.log(response.data)
     },
   ).catch((err)=>{console.log (err)})
   
