@@ -32,10 +32,9 @@ function AddSprint() {
               <div className="titlerow">
                 <label>Title</label>
                 <br></br>
+                </div>
+                <div className='description'>
                 <input type="text" />
-                
-              </div>
-              <div className="descriptiion">
                 <label>Description</label>
                 <br></br>
                 {/* <textarea/> */}
