@@ -1,13 +1,9 @@
 import './style.css'
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
-
-
-
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 //1.create new-click-redirect to the add sprint page
-
 
 //2.inside button tag of "create new"
 
@@ -22,32 +18,31 @@ import { useNavigate } from 'react-router-dom';
 
 //Row click - edit page
 
-function handleClick(){
-   navigate("/EditSprint");
+function handleClick() {
+  navigate('/EditSprint')
 }
 
-function Sprints() {
-  var url = "http://localhost:8000/fetchsprintlist";
-  axios.post(url, {
-    })
-  .then((response) => {
-    console.log(response);
-  }, (error) => {
-    console.log(error);
-  });
-  const navigate = useNavigate();
 
-   const count=10;
-   const [sprintarray,setsprintarray]= useState([
+function Sprints() {
+  var url = 'http://localhost:8000/fetchsprintlist'
+  var data = {}
+  var header = {}
+
+  axios.post(url,data,header).then(
+    (response.data) => {
+      console.log(response)
+    },
+  ).catch((err)=>{console.log (err)})
+  
+
+  const count = 10
+  const [sprintarray, setsprintarray] = useState([
     { Id: 1, name: 'sprint1', count },
     { Id: 2, name: 'sprint2', count },
     { Id: 3, name: 'sprint3', count },
     { Id: 4, name: 'sprint4', count },
     { Id: 5, name: 'sprint5', count },
   ])
-   
-  // var request = {};
-  // var header = {};
 
   return (
     <div>
@@ -73,23 +68,23 @@ function Sprints() {
           <div className="secondcolumn">
             <div className="prowone">
               <label>Sprints</label>
-              <button onClick= {handleClick}>Create New</button>
+              <button onClick={handleClick}>Create New</button>
             </div>
             <div className="tablerow">
-              
-                
-                  <th>id</th>
-                  <th>Sprint name</th>
-                  <th>Sprint owner</th>
-                
-{sprintarray.map((item,index)=>{
-  return(
-    <>
-    <tr></tr>
+              <th>id</th>
+              <th>Sprint name</th>
+              <th>Sprint owner</th>
 
-    </>
-  )
-})}   
+              {sprintarray.map((item, index) => {
+                return (
+                  <>
+                    <tr>
+                      <td>{item.Id}</td>
+                      <td>{item.name}</td>
+                    </tr>
+                  </>
+                )
+              })}
               <div className="pbutton">
                 <button>1</button>
                 <button>2</button>
@@ -101,6 +96,6 @@ function Sprints() {
         </div>
       </div>
     </div>
-  );
+  )
 }
-export default Sprints;
+export default Sprints
