@@ -3,6 +3,8 @@ const app = express()
 const port = 8000
 const mysql = require('mysql')
 app.use(express.json())
+const cors =require ('cors')
+app.use (cors())
 
 var con = mysql.createConnection({
   host: 'localhost',
@@ -145,7 +147,7 @@ app.post('/InsertSprint', function (req, res) {
 
 app.post('/fetchsprintlist', function (req, res) {
   var sql =
-    ' select Id,txtSprintname,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tblsprints'
+    ' select Id,txtSprintname,dtActstartdate,dtActenddate from tblsprints'
 
   con.query(sql, function (err, result) {
     if (err) throw err

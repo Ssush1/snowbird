@@ -209,11 +209,11 @@ padding: 10px;
 .tablerow th {
   color: slategray;
   border-bottom: 1px solid gray;
-  width: 45%;
+  width: 39%;
 }
 .tablerow td {
   color: slategray;
-  width: 45%;
+  width: 39%;
   border-bottom: 1px solid gray;
   padding: 4%;
 }

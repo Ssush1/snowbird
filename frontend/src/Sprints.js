@@ -1,7 +1,7 @@
 import './style.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 //1.create new-click-redirect to the add sprint page
 
@@ -18,34 +18,41 @@ import { useState, useEffect } from 'react'
 
 //Row click - edit page
 
-
-
 function Sprints() {
+  const navigate = useNavigate()
+  //const count = 10
+  const [sprintarray, setsprintarray] = useState([])
 
+  //   { Id: 1, name: 'sprint1', count },
+  //   { Id: 2, name: 'sprint2', count },
+  //   { Id: 3, name: 'sprint3', count },
+  //   { Id: 4, name: 'sprint4', count },
+  //   { Id: 5, name: 'sprint5', count },
   function handleClick() {
+  
+    navigate('/AddSprint')
+  }
+  function newClick() {
     navigate('/EditSprint')
   }
-  
+useEffect(()=>{
   var url = 'http://localhost:8000/fetchsprintlist'
-  var data = {}
+  var request = {}
   var header = {}
 
-  axios.post(url,data,header).then(
-    (response) => {
-      console.log(response.data)
-    },
-  ).catch((err)=>{console.log (err)})
+  axios
+    .post(url, request, header)
+    .then((res) => {
+      console.log(res.data)
+      setsprintarray(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+
+},[])
   
-
-  const count = 10
-  const [sprintarray, setsprintarray] = useState([
-    { Id: 1, name: 'sprint1', count },
-    { Id: 2, name: 'sprint2', count },
-    { Id: 3, name: 'sprint3', count },
-    { Id: 4, name: 'sprint4', count },
-    { Id: 5, name: 'sprint5', count },
-  ])
-
   return (
     <div>
       <div className="outer">
@@ -74,15 +81,18 @@ function Sprints() {
             </div>
             <div className="tablerow">
               <th>id</th>
-              <th>Sprint name</th>
-              <th>Sprint owner</th>
+              <th>Title</th>
+              <th>Start date</th>
+              <th>End date</th>
 
               {sprintarray.map((item, index) => {
                 return (
                   <>
-                    <tr>
+                    <tr onClick={newClick}>
                       <td>{item.Id}</td>
-                      <td>{item.name}</td>
+                      <td>{item.txtSprintname}</td>
+                      <td>{item.dtActstartdate}</td>
+                      <td>{item.dtActenddate}</td>
                     </tr>
                   </>
                 )

@@ -1,3 +1,4 @@
+import axios from 'axios'
 import './style.css'
 import { useNavigate } from 'react-router-dom';
   
@@ -69,7 +70,7 @@ function Users() {
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div>``
           </div>
           <div className="pages">
             <button>-</button>
