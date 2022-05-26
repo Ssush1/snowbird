@@ -170,6 +170,9 @@ app.post('/fetchsprintwisetasklist', function (req, res) {
     }
   })
 })
+
+/*API for Fetch FetchTasklist*/
+
 app.post('/fetchTasklist', function (req, res) {
   var sql =
     ' select  Id,txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks'
@@ -182,6 +185,8 @@ app.post('/fetchTasklist', function (req, res) {
   })
 })
 
+/*API for Fetch Insert Task*/
+
 app.post('/InsertTask', function (req, res) {
   var Tname = req.body.txtTitle
   var Tdesc = req.body.txtDesc
@@ -189,8 +194,11 @@ app.post('/InsertTask', function (req, res) {
   var Refepicid = req.body.refepicid
   var Assignedto = req.body.refAssignee
   var Refsprintid = req.body.refsprintid
- 
-
+  // var Start date
+  // console.log(Refepicid)
+  // console.log(Refsprintid)
+  // console.log(Assignedto)
+  
   var sql =
     "insert into tbltasks (txtTitle,txtDesc,txtStatus,refepicid,refAssignee,refsprintid) values('" +
     Tname +
@@ -199,20 +207,34 @@ app.post('/InsertTask', function (req, res) {
     "','" +
     Status +
     "','" +
-    Refepicid +
-    '","' +
-    Assignedto +
-    "','" +
-    Refsprintid +
-    "')"
+    Refepicid +"','"+ Refsprintid +"','"+ Assignedto +"')";
+    
 
   con.query(sql, function (err, result) {
     if (err) throw err
     else {
       res.send(result)
-    }
+      }
   })
 })
+
+/*API for update Task*/
+
+app.post('/updatetask', function (req, res) {
+  var Status = req.body.txtStatus
+  var ID = req.body.id
+  var sql =
+    "update tbltasks set txtStatus ='"+Status+"' where id='"+ID+"'";
+    
+
+  con.query(sql, function (err, result) {
+    if (err) throw err
+    res.send(result)
+  })
+})
+
+
+
 
 app.listen(8000, () => {
   console.log('Server is running')
