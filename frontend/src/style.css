@@ -179,7 +179,6 @@ __________________________________________________
 .prowone {
   width: 80%;
   height: 15vh;
-  /* background-color: aquamarine; */
   /* border-bottom: 1px solid black; */
   border-left: 5%;
   padding-top: 5%;
@@ -207,6 +206,7 @@ padding: 10px;
   height: 60vh;
 }
 .tablerow th {
+
   color: slategray;
   border-bottom: 1px solid gray;
   width: 45%;
@@ -238,32 +238,36 @@ color:yellow;
 }
 
 .psecondrow
-{
+{background-color: blue;
     width:100%;
     height: 10vh;
+    padding-bottom: 10%;
    
     padding-left: 10%;
 }
 .titlerow
-{
-    
-    width:100%;
+{background-color: azure;
+    width:50%;
     height:10vh;
+    float: left;
+    padding-bottom: 10%;
 
 }
 .titlerow input{
-   
+  
     width: 70%;
     height: 5vh;
+    float: left;
    
 }
 .titlerow label
 {
     color: gray;
+    width: 100%;
+    float: left;
 }
 .descriptiion
 {
-    
 width:100%;
  height:25vh;
 }
@@ -277,27 +281,33 @@ width:100%;
     
 }
 .typerow
-{
+{float: left;
     width:100%;
-    
+    background-color: blanchedalmond;
     height: 10vh;
 }
 .typerow select{
-    width:70%;
+    width:50%;
+    float: left;
+    background-color: rgb(18, 180, 180);
     height: 5vh;
+    color: grey;
 }
 .typerow label{
+  background-color: green;
     color: gray;
 }
 .ownerrow
 {
-    
-    width:100%;
+    background-color: burlywood;
+    width:72%;
     height: 10vh;
+    float: left;
 }
 .ownerrow select{
     width:70%;
     height: 5vh;
+    float: left;
 }
 .ownerrow label
 {
@@ -307,9 +317,7 @@ width:100%;
 {
     color: grey;
 }
-.typerow select{
-    color: grey;
-}
+
 
 .TBL {
   border:1px;

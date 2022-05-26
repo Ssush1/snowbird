@@ -3,8 +3,8 @@ const app = express()
 const port = 8000
 const mysql = require('mysql')
 app.use(express.json())
-const cors =require ('cors')
-app.use (cors())
+const cors = require('cors')
+app.use(cors())
 
 var con = mysql.createConnection({
   host: 'localhost',
@@ -162,6 +162,49 @@ app.post('/fetchsprintlist', function (req, res) {
 app.post('/fetchsprintwisetasklist', function (req, res) {
   var sql =
     " select  Id,txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks where refsprintid='1';"
+
+  con.query(sql, function (err, result) {
+    if (err) throw err
+    else {
+      res.send(result)
+    }
+  })
+})
+app.post('/fetchTasklist', function (req, res) {
+  var sql =
+    ' select  Id,txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks'
+
+  con.query(sql, function (err, result) {
+    if (err) throw err
+    else {
+      res.send(result)
+    }
+  })
+})
+
+app.post('/InsertTask', function (req, res) {
+  var Tname = req.body.txtTitle
+  var Tdesc = req.body.txtDesc
+  var Status = req.body.txtStatus
+  var Refepicid = req.body.refepicid
+  var Assignedto = req.body.refAssignee
+  var Refsprintid = req.body.refsprintid
+ 
+
+  var sql =
+    "insert into tbltasks (txtTitle,txtDesc,txtStatus,refepicid,refAssignee,refsprintid) values('" +
+    Tname +
+    "' ,'" +
+    Tdesc +
+    "','" +
+    Status +
+    "','" +
+    Refepicid +
+    '","' +
+    Assignedto +
+    "','" +
+    Refsprintid +
+    "')"
 
   con.query(sql, function (err, result) {
     if (err) throw err

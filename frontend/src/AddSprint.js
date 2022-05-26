@@ -31,18 +31,30 @@ function AddSprint() {
             <div className="psecondrow">
               <div className="titlerow">
                 <label>Title</label>
-                <br></br>
+                <input type="text" />
+                
+                </div>
+
+                <div className="titlerow">
+                <label>Description</label>
+                <textarea rows="6" cols="50"></textarea>
+                
                 </div>
                 <div className='description'>
-                <input type="text" />
-                <label>Description</label>
-                <br></br>
-                {/* <textarea/> */}
-                <input type="text" />
+                
+            
               </div>
 
               <div className="typerow">
-                <label>Type</label>
+                <label>Status</label>
+                <br></br>
+                <select>
+                  <option>--options--</option>
+                  <option>Sprint1</option>
+                  <option>Sprint2</option>
+                </select>
+
+                <label>Assigned to</label>
                 <br></br>
                 <select>
                   <option>--options--</option>
@@ -50,9 +62,20 @@ function AddSprint() {
                   <option>Sprint2</option>
                 </select>
               </div>
+              
+              
 
               <div className="ownerrow">
-                <label>Owner</label>
+                <label>From date</label>
+                <br></br>
+                <select>
+                  <option>--options--</option>
+                  <option>AAA</option>
+                  <option>BBB</option>
+                </select>
+                </div>
+                <div className="ownerrow">
+                <label>To date</label>
                 <br></br>
                 <select>
                   <option>--options--</option>
@@ -60,11 +83,12 @@ function AddSprint() {
                   <option>BBB</option>
                 </select>
               </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    
   )
 }
 export default AddSprint
