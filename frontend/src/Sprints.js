@@ -29,30 +29,27 @@ function Sprints() {
   //   { Id: 4, name: 'sprint4', count },
   //   { Id: 5, name: 'sprint5', count },
   function handleClick() {
-  
     navigate('/AddSprint')
   }
   function newClick() {
     navigate('/EditSprint')
   }
-useEffect(()=>{
-  var url = 'http://localhost:8000/fetchsprintlist'
-  var request = {}
-  var header = {}
+  useEffect(() => {
+    var url = 'http://localhost:8000/fetchsprintlist'
+    var request = {}
+    var header = {}
 
-  axios
-    .post(url, request, header)
-    .then((res) => {
-      console.log(res.data)
-      setsprintarray(res.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        console.log(res.data)
+        setsprintarray(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
-
-},[])
-  
   return (
     <div>
       <div className="outer">
@@ -76,14 +73,16 @@ useEffect(()=>{
           </div>
           <div className="secondcolumn">
             <div className="prowone">
-              <label>Sprints</label>
+              <label>Sprint</label>
               <button onClick={handleClick}>Create New</button>
             </div>
-            <div className="tablerow">
-              <th>id</th>
-              <th>Title</th>
-              <th>Start date</th>
-              <th>End date</th>
+            <table className="tablerow">
+              <tr className="TblFirstrow">
+                <th className="tblId">id</th>
+                <th className="tblTitle">Title</th>
+                <th className="tblDate">Start date</th>
+                <th className="tblDate">End date</th>
+              </tr>
 
               {sprintarray.map((item, index) => {
                 return (
@@ -97,12 +96,13 @@ useEffect(()=>{
                   </>
                 )
               })}
-              <div className="pbutton">
-                <button>1</button>
-                <button>2</button>
-                <button>...</button>
-                <button>10</button>
-              </div>
+            </table>
+
+            <div className="pbutton">
+              <button>1</button>
+              <button>2</button>
+              <button>...</button>
+              <button>10</button>
             </div>
           </div>
         </div>

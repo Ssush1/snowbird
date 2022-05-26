@@ -86,14 +86,12 @@
   border-left: 0;
   border-right: 0;
 }
-.secondcolumn .secthirdrow table{
-width:100%;
-text-align: left;
-}
+
 
 th{
   text-align: left;
-  background-color:rgb(236, 203, 203) ;
+  background-color:white ;
+  padding:6px;
 }
  
 __________________________________________________
@@ -177,14 +175,14 @@ __________________________________________________
 /* Sprint  Styling */
 
 .prowone {
-  width: 80%;
+  width: 100%;
   height: 15vh;
   /* border-bottom: 1px solid black; */
   border-left: 5%;
   padding-top: 5%;
 }
 .prowone label {
-  color: slategrey;
+  color: rgb(169, 173, 178);
   font-weight: 900;
   font-size: x-large;
   text-align: center;
@@ -192,34 +190,15 @@ __________________________________________________
 }
 .prowone button {
   float: right;
-  background-color: gray;
+  background-color: rgb(186, 184, 184);
   color: white;
   border: none;
-  height: 5vh;
-  width: 10%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.tablerow {
-  border-top: 1px solid gray;
-  width: 80%;
-padding: 10px;
-  height: 60vh;
-}
-.tablerow th {
-
-  color: slategray;
-  border-bottom: 1px solid gray;
-  width: 45%;
-}
-.tablerow td {
-  color: slategray;
-  width: 45%;
-  border-bottom: 1px solid gray;
-  padding: 4%;
-}
-.tablerow tr {
-  text-align: center;
-}
 .rowthree {
   height: 10vh;
   border-top: 1px solid black;
@@ -234,7 +213,7 @@ padding: 10px;
 
 .pbutton button:hover{
   font-weight: 500;
-color:yellow;
+color:green;
 }
 
 .psecondrow
@@ -317,8 +296,34 @@ width:100%;
 {
     color: grey;
 }
+.tablerow {
+  
+  border-top: 1px solid gray;
+  width: 100%;
+padding: 10px;
+  height: 60vh;
+  margin: 0 auto;
+}
+.tablerow th {
+  color: slategray;
+  border-bottom: 1px solid gray;
+  text-align: center;
+}
+.tablerow td {
+  color: slategray;
+  border-bottom: 1px solid gray;
+  padding: 4%;
+}
+.tablerow tr {
+  text-align: center;
+}
 
 
 .TBL {
   border:1px;
+}
+
+
+.TblFirstrow{
+  width:100%;
 }
