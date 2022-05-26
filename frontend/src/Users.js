@@ -1,8 +1,30 @@
 import axios from 'axios'
 import './style.css'
-import { useNavigate } from 'react-router-dom';
-  
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+
+function handleClick() {
+  navigate('/AddUser')
+}
+function newClick() {
+  navigate('/EditUser')
+}
 function Users() {
+
+  const navigate=useNavigate()
+  useEffect (()=>{
+    var request={}
+    var header={}
+    var url=
+
+  
+  })
+
+
+  
+  
+  
+  const[array,setarray]=useState([])
   return (
     <div>
       <div className="outer">
@@ -24,62 +46,41 @@ function Users() {
             </nav>
           </div>
           <div className="secondcolumn">
-            <div className="secfirstrow">
-              <h3>UserList</h3>
+            <div className="prowone">
+              <label>Users</label>
+              <button onClick={handleClick}>Create New</button>
             </div>
-            <div className="secsecondrow">
-              <button>Create New</button>
+            <table className="tablerow">
+              <tr className="TblFirstrow">
+                <th className="tblId">Id</th>
+                <th className="tblTitle">Users</th>
+                <th className="tblDate">UserRoles</th>
+              </tr>
+              <tr>
+                <th> Id</th>
+                <th> Users</th>
+                <th> UserRoles</th>
+              </tr>
+
+              {array.map((item, index) => {
+                return (
+                  <>
+                    <tr onClick={newClick}>
+                      <td>{item.Id}</td>
+                      <td>{item.txtUsername}</td>
+                      <td>{item.txtUserRole}</td>
+                    </tr>
+                  </>
+                )
+              })}
+            </table>
+
+            <div className="pbutton">
+              <button>1</button>
+              <button>2</button>
+              <button>...</button>
+              <button>10</button>
             </div>
-            <div className='secthirdrow'>
-              <table>
-                <thead>
-                  <th> Id</th>
-                  <th> Users</th>
-                  <th> UserRoles</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Ajay</td>
-                    <td>Team Leader</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Vandana</td>
-                    <td>Team Leader</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Ayush</td>
-                    <td>Team member</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Jatin</td>
-                    <td>Team member</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Pratibha</td>
-                    <td>Team member</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>Mridula</td>
-                    <td>Admin</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>``
-          </div>
-          <div className="pages">
-            <button>-</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>...</button>
-            <button>10</button>
-            <button>+</button>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import './style.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import Menu from './Menu'
 
 //1.create new-click-redirect to the add sprint page
 
@@ -29,6 +30,7 @@ function Sprints() {
   //   { Id: 4, name: 'sprint4', count },
   //   { Id: 5, name: 'sprint5', count },
   function handleClick() {
+    
     navigate('/AddSprint')
   }
   function newClick() {
@@ -60,8 +62,10 @@ function Sprints() {
         </div>
         <div className="secondrow">
           {/* Side navigation menu */}
-
-          <div className="firstcolumn">
+          
+          
+ <div className="firstcolumn">
+   {(Menu)}
             <nav>
               <li>Board</li>
               <li>Projects</li>
@@ -75,6 +79,7 @@ function Sprints() {
             <div className="prowone">
               <label>Sprint</label>
               <button onClick={handleClick}>Create New</button>
+
             </div>
             <table className="tablerow">
               <tr className="TblFirstrow">
