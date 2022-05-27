@@ -2,29 +2,34 @@ import axios from 'axios'
 import './style.css'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import Menu from './Menu'
 
-function handleClick() {
-  navigate('/AddUser')
-}
-function newClick() {
-  navigate('/EditUser')
-}
 function Users() {
+  const navigate = useNavigate()
+  function handleClick() {
+    navigate('/AddUser')
+  }
+  function newClick() {
+    navigate('/EditUser')
+  }
 
-  const navigate=useNavigate()
-  useEffect (()=>{
-    var request={}
-    var header={}
-    var url=
+  const [array, setarray] = useState([])
+  useEffect(() => {
+    var request = {}
+    var header = {}
+    var url = 'http://localhost:8000/fetchuserRole'
 
-  
-  })
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        console.log(res.data)
+        setarray(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
-
-  
-  
-  
-  const[array,setarray]=useState([])
   return (
     <div>
       <div className="outer">
@@ -35,16 +40,7 @@ function Users() {
         </div>
         <div className="secondrow">
           {/* Side navigation menu */}
-          <div className="firstcolumn">
-            <nav>
-              <li>Board</li>
-              <li>Projects</li>
-              <li>Epics</li>
-              <li>Tasks</li>
-              <li>Sprints</li>
-              <li>Users</li>
-            </nav>
-          </div>
+          {<Menu />}
           <div className="secondcolumn">
             <div className="prowone">
               <label>Users</label>
@@ -53,22 +49,17 @@ function Users() {
             <table className="tablerow">
               <tr className="TblFirstrow">
                 <th className="tblId">Id</th>
-                <th className="tblTitle">Users</th>
-                <th className="tblDate">UserRoles</th>
-              </tr>
-              <tr>
-                <th> Id</th>
-                <th> Users</th>
-                <th> UserRoles</th>
+                <th className="tblusers">Users</th>
+                <th className="tblrole">UserRoles</th>
               </tr>
 
               {array.map((item, index) => {
                 return (
                   <>
                     <tr onClick={newClick}>
-                      <td>{item.Id}</td>
-                      <td>{item.txtUsername}</td>
-                      <td>{item.txtUserRole}</td>
+                      <td>{item.id}</td>
+                      <td>{item.txtUserName}</td>
+                      <td>{item.txtUserrole}</td>
                     </tr>
                   </>
                 )

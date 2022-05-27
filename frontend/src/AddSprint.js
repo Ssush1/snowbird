@@ -1,4 +1,5 @@
-import './style.css'
+
+
 
 function AddSprint() {
   return (
@@ -11,17 +12,7 @@ function AddSprint() {
         </div>
         <div className="secondrow">
           {/* Side navigation menu */}
-
-          <div className="firstcolumn">
-            <nav>
-              <li>Board</li>
-              <li>Projects</li>
-              <li>Epics</li>
-              <li>Tasks</li>
-              <li>Sprints</li>
-              <li>Users</li>
-            </nav>
-          </div>
+      
           <div className="secondcolumn">
             <div className="prowone">
               <label>Add Sprint</label>
@@ -32,18 +23,13 @@ function AddSprint() {
               <div className="titlerow">
                 <label>Title</label>
                 <input type="text" />
-                
-                </div>
+              </div>
 
-                <div className="titlerow">
+              <div className="titlerow">
                 <label>Description</label>
                 <textarea rows="6" cols="50"></textarea>
-                
-                </div>
-                <div className='description'>
-                
-            
               </div>
+              <div className="description"></div>
 
               <div className="typerow">
                 <label>Status</label>
@@ -62,8 +48,6 @@ function AddSprint() {
                   <option>Sprint2</option>
                 </select>
               </div>
-              
-              
 
               <div className="ownerrow">
                 <label>From date</label>
@@ -73,8 +57,8 @@ function AddSprint() {
                   <option>AAA</option>
                   <option>BBB</option>
                 </select>
-                </div>
-                <div className="ownerrow">
+              </div>
+              <div className="ownerrow">
                 <label>To date</label>
                 <br></br>
                 <select>
@@ -83,12 +67,11 @@ function AddSprint() {
                   <option>BBB</option>
                 </select>
               </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
-    
+    </div>
   )
 }
 export default AddSprint

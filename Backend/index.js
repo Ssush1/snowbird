@@ -24,7 +24,7 @@ con.connect(function (err) {
 
 app.post('/fetchuserRole', function (req, res) {
   var sql =
-    " select tu.id,tu.txtUserName,tu.txtPassword,tr.txtUserrole from tblusers tu join tbluserroles tr on tu.RefUserRole=tr.id where tu.txtUsername='Arpana'"
+    "select tu.id,tu.txtUserName,tr.txtUserrole from tblusers tu join tbluserroles tr on tu.RefUserRole=tr.id order by tu.id asc;"
 
   con.query(sql, function (err, result) {
     if (err) throw err
@@ -161,7 +161,7 @@ app.post('/fetchsprintlist', function (req, res) {
 
 app.post('/fetchsprintwisetasklist', function (req, res) {
   var sql =
-    " select  Id,txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks where refsprintid='1';"
+    " select Id,txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks where refsprintid='1';"
 
   con.query(sql, function (err, result) {
     if (err) throw err
@@ -175,9 +175,9 @@ app.post('/fetchsprintwisetasklist', function (req, res) {
 
 app.post('/fetchTasklist', function (req, res) {
   var sql =
-    ' select  Id,txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks'
-
-  con.query(sql, function (err, result) {
+    "select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id) join tblprojects pr on pr.id=ep.refprojectid) order by id asc;"
+con.query(sql, function (err, result) {
+  
     if (err) throw err
     else {
       res.send(result)
@@ -232,9 +232,6 @@ app.post('/updatetask', function (req, res) {
     res.send(result)
   })
 })
-
-
-
 
 app.listen(8000, () => {
   console.log('Server is running')

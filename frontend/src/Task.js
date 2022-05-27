@@ -1,5 +1,35 @@
-import "./styles/styles.css";
-function TaskList() {
+import './style.css'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import Menu from './Menu'
+
+function Task() {
+  const navigate = useNavigate()
+  const [taskarray, settaskarray] = useState([])
+  function handleClick() {
+    navigate('/AddTask')
+  }
+  function newClick() {
+    navigate('/EditTask')
+  }
+
+  useEffect(() => {
+    var url = 'http://localhost:8000/fetchtasklist'
+    var request = {}
+    var header = {}
+
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        //console.log(res.data)
+        settaskarray(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
   return (
     <div>
       <div className="outer">
@@ -10,40 +40,48 @@ function TaskList() {
         </div>
         <div className="secondrow">
           {/* Side navigation menu */}
-          <div className="firstcolumn">
-            <nav>
-              <li>Board</li>
-              <li>Projects</li>
-              <li>Epics</li>
-              <li>Tasks</li>
-              <li>Sprints</li>
-              <li>Users</li>
-            </nav>
-          </div>
-
+          {<Menu />}
           {/* Main outline */}
           <div className="secondcolumn">
-            <div className="seccolumfirstrow">
-              <label>
-                <h2>Epic</h2>
-              </label>
-              <button className="buttonright">Create New</button>
+            <div className="prowone">
+              <label>Task</label>
+              <button onClick={handleClick}>Create New</button>
             </div>
-            <div className="seccolumsecondrow">
-              <table className="tableborder">
-                <thead>
-                  <th>#id</th> <th>Task</th> <th>Status</th>{" "}
-                  <th>Epic</th><th>ProjectName</th>
-                </thead>
-                <tbody>
-                    <tr className="trow"><td>1</td>   <td>User1</td>  <td>ToDo</td>  <td>Api</td><td>Ecommerce</td></tr>
-                    <tr className="trow"><td>2</td>   <td>User2</td>  <td>ToDo</td>  <td>Ui</td><td>Jira</td></tr>
-                </tbody>
-              </table>
-            </div>
+
+            <table className="tablerow">
+              <tr className="TblFirstrow">
+                <th>#id</th>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Epic</th>
+                <th>ProjectName</th>
+              </tr>
+              {taskarray.map((item, index) => {
+                return (
+                  <>
+                    <tr>
+                      <td className="tbdata">{item.id}</td>
+                      <td>{item.txtTitle}</td>
+                      <td>{item.txtStatus}</td>
+                      <td>{item.EpicName}</td>
+                      <td>{item.txtName}</td>
+                    </tr>
+                  </>
+                )
+              })}
+            </table>
+          </div>
+
+          <div className="pbutton">
+            <button>1</button>
+            <button>2</button>
+            <button>...</button>
+            <button>10</button>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
+
+export default Task

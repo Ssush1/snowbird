@@ -1,4 +1,4 @@
-import './style.css'
+import './style.css';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -30,7 +30,6 @@ function Sprints() {
   //   { Id: 4, name: 'sprint4', count },
   //   { Id: 5, name: 'sprint5', count },
   function handleClick() {
-    
     navigate('/AddSprint')
   }
   function newClick() {
@@ -62,38 +61,26 @@ function Sprints() {
         </div>
         <div className="secondrow">
           {/* Side navigation menu */}
-          
-          
- <div className="firstcolumn">
-   {(Menu)}
-            <nav>
-              <li>Board</li>
-              <li>Projects</li>
-              <li>Epics</li>
-              <li>Tasks</li>
-              <li>Sprints</li>
-              <li>Users</li>
-            </nav>
-          </div>
+          {<Menu/>}
+
           <div className="secondcolumn">
             <div className="prowone">
               <label>Sprint</label>
               <button onClick={handleClick}>Create New</button>
-
             </div>
             <table className="tablerow">
               <tr className="TblFirstrow">
-                <th className="tblId">id</th>
-                <th className="tblTitle">Title</th>
-                <th className="tblDate">Start date</th>
-                <th className="tblDate">End date</th>
+                <th>#id</th>
+                <th>Title</th>
+                <th>Start date</th>
+                <th>End date</th>
               </tr>
 
               {sprintarray.map((item, index) => {
                 return (
                   <>
                     <tr onClick={newClick}>
-                      <td>{item.Id}</td>
+                      <td className="tbdata">{item.Id}</td>
                       <td>{item.txtSprintname}</td>
                       <td>{item.dtActstartdate}</td>
                       <td>{item.dtActenddate}</td>

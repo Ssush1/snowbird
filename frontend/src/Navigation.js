@@ -3,6 +3,7 @@ import EditSprint from "./EditSprint";
 import Users from "./Users";
 import AddSprint from "./AddSprint";
 import Sprints from "./Sprints";
+import Task from "./Task";
 
 function Navigation() {
   return (
@@ -19,6 +20,10 @@ function Navigation() {
             
           </Route>
           <Route path="/EditSprint" element={<EditSprint/>}></Route>
+  
+
+        
+          <Route path="/Task" element={<Task/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

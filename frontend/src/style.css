@@ -1,19 +1,19 @@
-body{
-  margin:0;
+body {
+  margin: 0;
 }
 
 .outer {
-
   width: 100%;
   height: 100vh;
 }
 .firstrow {
   border-bottom: 1px solid black;
   text-align: right;
-  height: 5vh;
+  height: 6vh;
+  width:100%;
 }
 .firstrow label {
-  color: rgb(202, 165, 165);
+  color: rgb(130, 127, 127);
   font-size: small;
 }
 .secondrow {
@@ -23,9 +23,11 @@ body{
 .usericon {
   height: 3vh;
   width: 20px;
-  border-radius: 25px;
+  border-radius: 15px;
   background-color: blue;
   float: right;
+  padding-left:5px;
+  padding-top: 5px;
 }
 
 .firstcolumn {
@@ -61,20 +63,18 @@ body{
   text-align-last: right;
 }
 
- button {
+button {
   border-style: hidden;
   background-color: white;
 }
 
-
-
-.secondcolumn .secsecondrow button{
-  float:right;
+.secondcolumn .secsecondrow button {
+  float: right;
   border: 1px;
   border-style: solid;
   border-color: black;
   margin-bottom: 60px;
-  background-color: rgb(187, 180, 180) ;
+  background-color: rgb(187, 180, 180);
 }
 
 .secondcolumn .secthirdrow {
@@ -86,15 +86,13 @@ body{
   border-right: 0;
 }
 
-
-th{
+th {
   text-align: left;
-  background-color:white ;
-  padding:6px;
+  background-color: white;
+  padding: 6px;
 }
- 
-__________________________________________________
-.usernamerow {
+
+__________________________________________________ .usernamerow {
   width: 100%;
   height: 15vh;
 }
@@ -174,7 +172,7 @@ __________________________________________________
 /* Sprint  Styling */
 
 .prowone {
-  width: 100%;
+  width: 80%;
   height: 15vh;
   /* border-bottom: 1px solid black; */
   border-left: 5%;
@@ -196,7 +194,7 @@ __________________________________________________
   padding-right: 20px;
   padding-top: 1%;
   padding-bottom: 1%;
-
+  
 }
 .rowthree {
   height: 10vh;
@@ -210,98 +208,80 @@ __________________________________________________
   background-color: white;
 }
 
-.pbutton button:hover{
+.pbutton button:hover {
   font-weight: 500;
-color:green;
+  color: green;
 }
 
-.psecondrow
-{background-color: blue;
-    width:100%;
-    height: 10vh;
-    padding-bottom: 10%;
-   
-    padding-left: 10%;
-}
-.titlerow
-{background-color: azure;
-    width:50%;
-    height:10vh;
-    float: left;
-    padding-bottom: 10%;
+.psecondrow {
+  width: 100%;
+  height: 10vh;
+  padding-bottom: 10%;
 
+  padding-left: 10%;
 }
-.titlerow input{
-  
-    width: 70%;
-    height: 5vh;
-    float: left;
-   
+.titlerow {
+  width: 50%;
+  height: 10vh;
+  float: left;
+  padding-bottom: 10%;
 }
-.titlerow label
-{
-    color: gray;
-    width: 100%;
-    float: left;
+.titlerow input {
+  width: 70%;
+  height: 5vh;
+  float: left;
 }
-.descriptiion
-{
-width:100%;
- height:25vh;
+.titlerow label {
+  color: gray;
+  width: 100%;
+  float: left;
 }
-.descriptiion
-{
-    color: gray;
+.descriptiion {
+  width: 100%;
+  height: 25vh;
 }
-.descriptiion input{
-    width:70%;
-    height:20vh;
-    
+.descriptiion {
+  color: gray;
 }
-.typerow
-{float: left;
-    width:100%;
-    background-color: blanchedalmond;
-    height: 10vh;
+.descriptiion input {
+  width: 70%;
+  height: 20vh;
 }
-.typerow select{
-    width:50%;
-    float: left;
-    background-color: rgb(18, 180, 180);
-    height: 5vh;
-    color: grey;
+.typerow {
+  float: left;
+  width: 100%;
+  height: 10vh;
 }
-.typerow label{
-  background-color: green;
-    color: gray;
+.typerow select {
+  width: 50%;
+  float: left;
+  height: 5vh;
+  color: grey;
 }
-.ownerrow
-{
-  
-    width:72%;
-    height: 10vh;
-    float: left;
+.typerow label {
+  color: gray;
 }
-.ownerrow select{
-    width:70%;
-    height: 5vh;
-    float: left;
+.ownerrow {
+  width: 72%;
+  height: 10vh;
+  float: left;
 }
-.ownerrow label
-{
-    color: gray;
+.ownerrow select {
+  width: 70%;
+  height: 5vh;
+  float: left;
 }
-.ownerrow select
-{
-    color: grey;
+.ownerrow label {
+  color: gray;
+}
+.ownerrow select {
+  color: grey;
 }
 .tablerow {
-  
   border-top: 1px solid gray;
   width: 100%;
-padding: 10px;
-  height: 60vh;
-  margin: 0 auto;
+  padding: 10px;
+margin: 0 auto;
 }
 .tablerow th {
   color: slategray;
@@ -311,19 +291,33 @@ padding: 10px;
 .tablerow td {
   color: slategray;
   border-bottom: 1px solid gray;
-padding-top: 10px;
-padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .tablerow tr {
   text-align: center;
 }
 
-
 .TBL {
-  border:1px;
+  border: 1px;
 }
 
-
-.TblFirstrow{
-  width:100%;
+.TblFirstrow {
+  width: 100%;
+}
+.tblId{
+  width:20%;
+}
+.tblusers{
+  width:20%;
+}
+.tblrole{
+  width:24%;
+}
+ .tbdata {
+  padding: 10px;
+}
+.Ttable{
+  width:60%;
+  
 }
