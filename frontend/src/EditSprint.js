@@ -1,4 +1,31 @@
+import './style.css'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import Menu from './Menu'
+
 function EditSprint() {
+  const [options, setOption] = useState([])
+  const [Sprintname, settextSprintname] = useState('')
+  const [assignedto, settxtUserName] = useState('')
+  const navigate = useNavigate()
+  useEffect(() => {
+    var url = 'http://localhost:8000/fetchuserRole'
+    var request = {}
+    var header = {}
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        console.log(res.data)
+        var len = res.data.length
+        // setA(len);
+        if (len > 0) {
+          setOption(res.data)
+        }
+      })
+      .catch()
+  }, [])
+
   return (
     <div>
       <div className="outer">
@@ -9,21 +36,11 @@ function EditSprint() {
         </div>
         <div className="secondrow">
           {/* Side navigation menu */}
-
-          <div className="firstcolumn">
-            <nav>
-              <li>Board</li>
-              <li>Projects</li>
-              <li>Epics</li>
-              <li>Tasks</li>
-              <li>Sprints</li>
-              <li>Users</li>
-            </nav>
-          </div>
+{<Menu/>}
           <div className="secondcolumn">
             <div className="prowone">
               <label>EditSprint</label>
-              <button>SAVE</button>
+              <button onClick={handleclick}>SAVE</button>
             </div>
 
             <div className="psecondrow">

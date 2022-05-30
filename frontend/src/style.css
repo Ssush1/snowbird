@@ -7,6 +7,7 @@ body {
   height: 100vh;
 }
 .firstrow {
+
   border-bottom: 1px solid black;
   text-align: right;
   height: 6vh;
@@ -217,7 +218,6 @@ __________________________________________________ .usernamerow {
   width: 100%;
   height: 10vh;
   padding-bottom: 10%;
-
   padding-left: 10%;
 }
 .titlerow {
@@ -227,8 +227,8 @@ __________________________________________________ .usernamerow {
   padding-bottom: 10%;
 }
 .titlerow input {
-  width: 70%;
-  height: 5vh;
+ width: 70%;
+  height: 6vh;
   float: left;
 }
 .titlerow label {
@@ -236,28 +236,28 @@ __________________________________________________ .usernamerow {
   width: 100%;
   float: left;
 }
-.descriptiion {
+.description {
   width: 100%;
   height: 25vh;
-}
-.descriptiion {
   color: gray;
 }
-.descriptiion input {
+
+.description input {
   width: 70%;
   height: 20vh;
 }
 .typerow {
-  float: left;
-  width: 100%;
+ width: 100%;
   height: 10vh;
 }
 .typerow select {
-  width: 50%;
+  width: 36%;
+  height: 7vh;
   float: left;
-  height: 5vh;
   color: grey;
 }
+  
+
 .typerow label {
   color: gray;
 }
@@ -265,6 +265,11 @@ __________________________________________________ .usernamerow {
   width: 72%;
   height: 10vh;
   float: left;
+}
+
+.ownerrow input{
+  width: 40%;
+  height: 3.5vh;
 }
 .ownerrow select {
   width: 70%;
