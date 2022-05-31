@@ -9,6 +9,11 @@ function EditSprint() {
   const [Sprintname, settextSprintname] = useState('')
   const [assignedto, settxtUserName] = useState('')
   const navigate = useNavigate()
+
+  const handleclick=()=>{};
+  const taskarray=()=>{};
+  const newClick=()=>{};
+
   useEffect(() => {
     var url = 'http://localhost:8000/fetchuserRole'
     var request = {}
@@ -36,7 +41,7 @@ function EditSprint() {
         </div>
         <div className="secondrow">
           {/* Side navigation menu */}
-{<Menu/>}
+          {<Menu />}
           <div className="secondcolumn">
             <div className="prowone">
               <label>EditSprint</label>
@@ -49,31 +54,78 @@ function EditSprint() {
                 <br></br>
                 <input type="text" />
               </div>
-              <div className="descriptiion">
+              <div className="titlerow1">
                 <label>Description</label>
-                <br></br>
-                {/* <textarea/> */}
-                <input type="text" />
+                <textarea rows="6" cols="50"></textarea>
               </div>
 
               <div className="typerow">
-                <label>Type</label>
+                <label>Status</label>
                 <br></br>
                 <select>
                   <option>--options--</option>
-                  <option>Sprint1</option>
-                  <option>Sprint2</option>
+                  <option>To do</option>
+                  <option>In Progress</option>
+                  <option>Review</option>
+                  <option>Completed</option>
+                </select>
+
+                <label>Assigned to</label>
+                <br></br>
+                <select
+                  onChange={(e) => {
+                    settxtUserName(e.target.value)
+                  }}
+                >
+                  {options.map((item, index) => {
+                    return (
+                      <>
+                        <option value={item.id}>{item.txtUserName}</option>
+                      </>
+                    )
+                  })}
                 </select>
               </div>
 
               <div className="ownerrow">
-                <label>Owner</label>
+                <label>From date</label>
+                <input type="date" />
                 <br></br>
-                <select>
-                  <option>--options--</option>
-                  <option>AAA</option>
-                  <option>BBB</option>
-                </select>
+              </div>
+              <div className="ownerrow">
+                <label>To date</label>
+                <input type="date" />
+              </div>
+
+              <div className="prowone">
+                <label>Task</label>
+                <button onClick={handleclick}>Add Task</button>
+              </div>
+
+              <div>
+                <table className="tablerow">
+                  <tr className="TblFirstrow">
+                    <th>#id</th>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th>Epic Name</th>
+                    <th>Project Name</th>
+                  </tr>
+
+                  {taskarray.map((item, index) => {
+                    return (
+                      <>
+                        <tr onClick={newClick}>
+                          <td className="tbdata">{item.Id}</td>
+                          <td>{item.txttaskname}</td>
+                          <td>{item.status}</td>
+                          <td>{item.epicname}</td>
+                          <td>{item.projectname}</td>
+                        </tr>
+                      </>
+                    )
+                  })}
+                </table>
               </div>
             </div>
           </div>
@@ -82,4 +134,5 @@ function EditSprint() {
     </div>
   )
 }
+
 export default EditSprint

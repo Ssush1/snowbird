@@ -1,49 +1,28 @@
-import './style.css'
+import './style1.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Menu from './Menu'
-import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css'
+import './css/addsprintstyle.css'
 
 function AddSprint() {
   const [options, setOption] = useState([])
   const [Sprintname, settextSprintname] = useState('')
-  const [Description,setdescription]=useState('')
+  const [Description, setdescription] = useState('')
   const [assignedto, settxtUserName] = useState('')
-  const [todate,settodate]=useState(new Date())
+  const [todate, settodate] = useState(new Date())
   const [fromdate, setfromdate] = useState(new Date())
-  const [Status,setstatus]= useState('')
+  const [Status, setstatus] = useState('')
+  const [taskarray, settaskarray] = useState([])
   //const handlechange = (date) => setfromdate(date)
   const navigate = useNavigate()
-  //const m = moment(date, 'yy-mm-dd');
-  //console.log(m.format('MMMM'))
-  //List-dropdown -Assigned to
-  useEffect(() => {
-    var url = 'http://localhost:8000/fetchuserRole'
-    var request = {}
-    var header = {}
-    axios
-      .post(url, request, header)
-      .then((res) => {
-        console.log(res.data)
-        var len = res.data.length
-        // setA(len);
-        if (len > 0) {
-          setOption(res.data)
-        }
-      })
-      .catch()
-  }, [])
-
-  //insert of new sprint
 
   function handleclick() {
     var url = 'http://localhost:8000/insertSprint'
     var request = {
       Title: Sprintname,
-      Description:Description,
-      Status:Status,
+      Description: Description,
+      Status: Status,
       Assignedto: assignedto,
       FromDate: fromdate,
       ToDate: todate,
@@ -64,23 +43,23 @@ function AddSprint() {
 
   return (
     <div className="outer">
-      {/* USer name with icon */}
       <div className="firstrow">
         <div className="usericon"> </div>
         <label>User</label>
       </div>
       <div className="secondrow">
-        {/*Side navigation menu */}
-
         <Menu />
-
-        <div className="secondcolumn">
-          <div className="prowone">
-            <label>Add Sprint</label>
-            <button onClick={handleclick}>SAVE</button>
+        <div className="as_sc">
+          <div className="as_sc_row1">
+            <div className="as_sc_row1_cl1">
+              <label>Add Sprint</label>
+            </div>
+            <div className="as_sc_row1_cl2">
+              <button onClick={handleclick}>SAVE</button>
+            </div>
           </div>
-          <div className="psecondrow">
-            <div className="titlerow">
+          <div className="as_sc_row2">
+            <div className="as_sc_row2_cl1">
               <label>Title</label>
               <input
                 type="text"
@@ -90,73 +69,65 @@ function AddSprint() {
               />
             </div>
 
-            <div className="titlerow">
+            <div className="as_sc_row2_cl2">
               <label>Description</label>
               <textarea rows="6" cols="50"></textarea>
             </div>
-
-            <div className="typerow">
-              <label>Status</label>
-              <br></br>
-              <select>
-                <option>--options--</option>
-                <option>To do</option>
-                <option>In Progress</option>
-                <option>Review</option>
-                <option>Completed</option>
-              </select>
-
-              <label>Assigned to</label>
-              <br></br>
-              <select
-                onChange={(e) => {
-                  settxtUserName(e.target.value)
-                }}
-              >
-                {options.map((item, index) => {
-                  return (
-                    <>
-                      <option value={item.id}>{item.txtUserName}</option>
-                    </>
-                  )
-                })}
-              </select>
+          </div>
+          <div className="as_sc_row3">
+            <div>
+            <label>Status</label>
+            <br></br>
+            <select>
+              <option>--options--</option>
+              <option>To do</option>
+              <option>In Progress</option>
+              <option>Review</option>
+              <option>Completed</option>
+            </select>
             </div>
+            <div><label>Assigned to</label></div>
+    
+            <br></br>
+            <select
+              onChange={(e) => {
+                settxtUserName(e.target.value)
+              }}
+            >
+              {options.map((item, index) => {
+                return (
+                  <>
+                    <option value={item.id}>{item.txtUserName}</option>
+                  </>
+                )
+              })}
+            </select>
+          </div>
 
-            <div className="ownerrow">
-              <label>From date</label>
-              <input type="date"/>
-              <br></br>
-              {/* <select>
-                  <DatePicker
-                    selected={date}
-                    onChange={handlechange}
-                    showTimeSelect
-                    dateFormat="MMMM d, yyyy h:mm aa"
-                  /> */}
+          <div className="ownerrow">
+            <label>From date</label>
+            <input type="date" />
+            <br></br>
+          </div>
+          <div className="ownerrow">
+            <label>To date</label>
+            <input type="date" />
+          </div>
 
-              {/* <option>{m.format('MMMM')}</option> */}
-              {/* <Datepicker */}
-              {/* controls={['calendar', 'time']}
-   timeFormat="HH:mm:ss"
- /> */}
-              {/* </select> */}
-            </div>
-            <div className="ownerrow">
-              
-              <label>To date</label> 
-              <input type="date"/>
-              <br></br>
-              <select>
-                <option>--options--</option> <option>AAA</option> */}
-                <option>BBB</option>
-              </select>
-            </div>
+          <div className="prowone">
+            <label>Task</label>
+            <button onClick={handleclick}>Add Task</button>
+          </div>
+
+          <div className="pbutton">
+            <button>1</button>
+            <button>2</button>
+            <button>...</button>
+            <button>10</button>
           </div>
         </div>
       </div>
     </div>
   )
 }
-
 export default AddSprint

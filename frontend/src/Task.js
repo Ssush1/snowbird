@@ -45,7 +45,7 @@ function Task() {
           <div className="secondcolumn">
             <div className="prowone">
               <label>Task</label>
-              <button onClick={handleClick}>Create New</button>
+              <button onClick={handleClick}>Add Task</button>
             </div>
 
             <table className="tablerow">
@@ -59,7 +59,7 @@ function Task() {
               {taskarray.map((item, index) => {
                 return (
                   <>
-                    <tr>
+                    <tr onClick={newClick}>
                       <td className="tbdata">{item.id}</td>
                       <td>{item.txtTitle}</td>
                       <td>{item.txtStatus}</td>

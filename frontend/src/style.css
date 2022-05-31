@@ -7,8 +7,7 @@ body {
   height: 100vh;
 }
 .firstrow {
-
-  border-bottom: 1px solid black;
+ border-bottom: 1px solid black;
   text-align: right;
   height: 6vh;
   width:100%;

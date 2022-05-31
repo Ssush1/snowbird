@@ -1,0 +1,39 @@
+.as_sc{
+    width: 100%;
+}
+.as_sc_row1{
+    width: 100%;
+    display: flex;
+    background-color: red;
+}
+.as_sc_row1 .as_sc_row1_cl1{
+    text-align: left;
+    width: 50%;
+}
+.as_sc_row1 .as_sc_row1_cl2{
+    text-align: right;
+    width: 50%;
+}
+.as_sc_row1 button{
+    text-align: right;
+}
+.as_sc_row2{
+    display:flex;
+    background-color: green;
+    width:100%;
+    justify-content: space-between;
+}
+
+.as_sc_row2_cl1,.as_sc_row2_cl2{
+width:49%;
+
+}
+.as_sc_row2_cl1 input,.as_sc_row2_cl2 textarea{
+    width:100%;
+    float:left;
+    box-sizing: border-box;
+    padding:5px;
+}
+
+
+
