@@ -160,8 +160,9 @@ app.post('/fetchsprintlist', function (req, res) {
 /*API for Fetch Sprintwisetasklist*/
 
 app.post('/fetchsprintwisetasklist', function (req, res) {
+  var Sid = req.body.refsprintid
   var sql =
-    " select Id,txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks where refsprintid='1';"
+    " select txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks where refsprintid='"+Sid+"';"
 
   con.query(sql, function (err, result) {
     if (err) throw err

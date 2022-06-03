@@ -286,6 +286,7 @@ __________________________________________________ .usernamerow {
   width: 100%;
   padding: 10px;
 margin: 0 auto;
+margin-top: 30px;
 }
 .tablerow th {
   color: slategray;
@@ -324,4 +325,4 @@ margin: 0 auto;
 .Ttable{
   width:60%;
   
-}
+} 

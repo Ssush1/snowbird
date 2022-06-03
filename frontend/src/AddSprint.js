@@ -1,10 +1,8 @@
-import './style1.css'
+import './css/addsprintstyle.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Menu from './Menu'
-import './css/addsprintstyle.css'
-
 function AddSprint() {
   const [options, setOption] = useState([])
   const [Sprintname, settextSprintname] = useState('')
@@ -13,27 +11,36 @@ function AddSprint() {
   const [todate, settodate] = useState(new Date())
   const [fromdate, setfromdate] = useState(new Date())
   const [Status, setstatus] = useState('')
-  const [taskarray, settaskarray] = useState([])
-  //const handlechange = (date) => setfromdate(date)
+  const [array, setArray] = useState([])
+  // const [taskarray, settaskarray] = useState([])
+
   const navigate = useNavigate()
+  useEffect(() => {
+    var url = 'http://localhost:8000/fetchuser'
+    var req = {}
+    var header = {}
+    axios
+      .post(url, req, header)
+      .then((res) => {
+        setArray(res.data)
+      })
+      .catch()
+  }, [])
 
   function handleclick() {
     var url = 'http://localhost:8000/insertSprint'
     var request = {
-      Title: Sprintname,
-      Description: Description,
-      Status: Status,
-      Assignedto: assignedto,
-      FromDate: fromdate,
-      ToDate: todate,
+      txtSprintname: Sprintname,
+      stdate: fromdate,
+      enddate: todate,
     }
-    //console.log('assignedto:' + JSON.stringify(assignedto))
+    console.log(request)
     var header = {}
 
     axios
       .post(url, request, header)
       .then((res) => {
-        console.log('reS' + JSON.stringify(res.data))
+        console.log('result' + JSON.stringify(res.data))
         if (res.data !== 'undefined') {
           alert('added new sprint')
         }
@@ -48,7 +55,7 @@ function AddSprint() {
         <label>User</label>
       </div>
       <div className="secondrow">
-        <Menu />
+        {<Menu />}
         <div className="as_sc">
           <div className="as_sc_row1">
             <div className="as_sc_row1_cl1">
@@ -71,55 +78,60 @@ function AddSprint() {
 
             <div className="as_sc_row2_cl2">
               <label>Description</label>
-              <textarea rows="6" cols="50"></textarea>
+              <textarea rows="8" cols="60"></textarea>
             </div>
           </div>
           <div className="as_sc_row3">
-            <div>
-            <label>Status</label>
-            <br></br>
-            <select>
-              <option>--options--</option>
-              <option>To do</option>
-              <option>In Progress</option>
-              <option>Review</option>
-              <option>Completed</option>
-            </select>
+            <div className="as_sc_row3_cl1">
+              <label>Status</label>
+
+              <select className="as_sc_dropbox1">
+                <option>--options--</option>
+                <option>To do</option>
+                <option>In Progress</option>
+                <option>Review</option>
+                <option>Completed</option>
+              </select>
             </div>
-            <div><label>Assigned to</label></div>
-    
-            <br></br>
-            <select
-              onChange={(e) => {
-                settxtUserName(e.target.value)
-              }}
-            >
-              {options.map((item, index) => {
-                return (
-                  <>
-                    <option value={item.id}>{item.txtUserName}</option>
-                  </>
-                )
-              })}
-            </select>
+            <div className="as_sc_row3_cl2">
+              <label>Assigned to</label>
+              <select
+                className="as_sc_dropbox2"
+                onChange={(e) => {
+                  settxtUserName(e.target.value)
+                }}
+              >
+                {array.map((item, index) => {
+                  return (
+                    <>
+                      <option value={item.id}>{item.txtUserName}</option>
+                    </>
+                  )
+                })}
+              </select>
+            </div>
           </div>
-
-          <div className="ownerrow">
-            <label>From date</label>
-            <input type="date" />
-            <br></br>
+          <div className="as_sc_row4">
+            <div className="as_sc_row4_cl1">
+              <label>From date</label>
+              <input
+                type="date"
+                onChange={(e) => {
+                  setfromdate(e.target.value)
+                }}
+              />
+            </div>
+            <div className="as_sc_row4_cl2">
+              <label>To date</label>
+              <input
+                type="date"
+                onChange={(e) => {
+                  settodate(e.target.value)
+                }}
+              />
+            </div>
           </div>
-          <div className="ownerrow">
-            <label>To date</label>
-            <input type="date" />
-          </div>
-
-          <div className="prowone">
-            <label>Task</label>
-            <button onClick={handleclick}>Add Task</button>
-          </div>
-
-          <div className="pbutton">
+          <div className="as_sc_row6">
             <button>1</button>
             <button>2</button>
             <button>...</button>
