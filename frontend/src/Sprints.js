@@ -32,8 +32,8 @@ function Sprints() {
   function handleClick() {
     navigate('/AddSprint')
   }
-  function newClick(e,id) {
-    localStorage.setItem('id',id)
+  function newClick(e,Id) {
+    localStorage.setItem('spid',Id)
    navigate('/EditSprint')
   }
   useEffect(() => {

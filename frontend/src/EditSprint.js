@@ -6,42 +6,52 @@ import Menu from './Menu'
 
 function EditSprint() {
   // const [options, setOption] = useState([])
-  const [Sprintname, settextSprintname] = useState('')
+  const [txtSprintname, settextSprintname] = useState()
+  const [Description, setdescription] = useState('')
+  const [Status, setStatus] = useState('')
   const [assignedto, settxtUserName] = useState('')
-  const [todate, settodate] = useState('')
-  const [fromdate, setfromdate] = useState('')
+  const [todate, setdtActenddate] = useState('')
+  const [fromdate, setdtActstartdate] = useState('')
   const [array, setArray] = useState([])
   const [taskarray, settaskarray] = useState([])
+  const [statarray, setstatarray] = useState([])
+  const [sparray, setsparray] = useState([])
   const navigate = useNavigate()
-  const [id, setid] = useState('0')
-  var tempid=localStorage.getItem(id);
-  setid(tempid)
-  
+  const [Id, setid] = useState('')
+
   useEffect(() => {
-    //localStorage.getItem(id)
-    
-    var url = 'http://localhost:8000/fetchsprintwisetasklist'
-    var req = {"refsprintid":1}
+    //localStorage.getItem(Id)
+    var tempid = localStorage.getItem('spid')
+    //console.log(tempid)
+    setid(tempid)
+    var url = 'http://localhost:8000/sprintdetails'
+    var req = {Id}
     var header = {}
     axios
       .post(url, req, header)
       .then((res) => {
-        console.log('response'+ JSON.stringify(res.data))
+        //console.log(JSON.stringify(req))
+        console.log('response' + JSON.stringify(res.data))
+        setsparray(res.data)
+
+        settextSprintname(res.data[0].txtSprintname)
+        setdtActstartdate(res.data[0].dtActstartdate)
+        setdtActenddate(res.data[0].dtActenddate)
       })
       .catch()
   }, [])
 
- 
-
   function handleclick() {
     var url = 'http://localhost:8000/updatesprint'
     var request = {
-      id:tempid,
-      txtSprintname: Sprintname,
-      //stdate: fromdate,
-      //enddate: todate,
+      // txtSprintname: Sprintname,
+      desc: Description,
+      dtActstartdate: fromdate,
+      dtActenddate: todate,
+      status: Status,
+      Assigned: assignedto,
     }
-    console.log(request)
+    // console.log(request)
     var header = {}
 
     axios
@@ -49,7 +59,7 @@ function EditSprint() {
       .then((res) => {
         // console.log('result' + JSON.stringify(res.data))
         if (res.data !== 'undefined') {
-          alert('sprint updation success')
+          alert('updated sprint')
         }
       })
       .catch()
@@ -61,7 +71,6 @@ function EditSprint() {
   return (
     <div className="outer">
       <div className="firstrow">
-
         <div className="usericon"> </div>
         <label>User</label>
       </div>
@@ -70,7 +79,7 @@ function EditSprint() {
         <div className="as_sc">
           <div className="as_sc_row1">
             <div className="as_sc_row1_cl1">
-              <label>EditSprint {id}</label>
+              <label>EditSprint</label>
             </div>
             <div className="as_sc_row1_cl2">
               <button onClick={handleclick}>SAVE</button>
@@ -81,6 +90,7 @@ function EditSprint() {
               <label>Title</label>
               <input
                 type="text"
+                value={txtSprintname}
                 onChange={(e) => {
                   settextSprintname(e.target.value)
                 }}
@@ -89,19 +99,30 @@ function EditSprint() {
 
             <div className="as_sc_row2_cl2">
               <label>Description</label>
-              <textarea rows="8" cols="60"></textarea>
+              <textarea
+                rows="8"
+                cols="60"
+                onChange={(e) => {
+                  setdescription(e.target.value)
+                }}
+              ></textarea>
             </div>
           </div>
           <div className="as_sc_row3">
             <div className="as_sc_row3_cl1">
               <label>Status</label>
 
-              <select className="as_sc_dropbox1">
+              <select
+                className="as_sc_dropbox1"
+                onChange={(e) => {
+                  setStatus(e.target.value)
+                }}
+              >
                 <option>--options--</option>
-                <option>To do</option>
-                <option>In Progress</option>
-                <option>Review</option>
-                <option>Completed</option>
+                <option value="">To do</option>
+                <option value="">In Progress</option>
+                <option value="">Review</option>
+                <option value="">Completed</option>
               </select>
             </div>
             <div className="as_sc_row3_cl2">
@@ -128,7 +149,7 @@ function EditSprint() {
               <input
                 type="date"
                 onChange={(e) => {
-                  setfromdate(e.target.value)
+                  setdtActstartdate(e.target.value)
                 }}
               />
             </div>
@@ -137,7 +158,7 @@ function EditSprint() {
               <input
                 type="date"
                 onChange={(e) => {
-                  settodate(e.target.value)
+                  setdtActenddate(e.target.value)
                 }}
               />
             </div>

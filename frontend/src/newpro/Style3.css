@@ -1,0 +1,23 @@
+body{margin: 0;}
+.Outerdiv{
+    width:100%;
+     background-color: rgb(38, 163, 240);
+}
+.innerdiv{background-color: rgb(86, 86, 188);
+width:25%;
+    
+
+}
+.row1,.row2,.row3,.row4{padding:4%;}
+.row1{ text-align: center;
+font-size: larger ;}
+.row2, .row3, .row4{text-align: center;}
+
+.row3 input,.row2 input{ padding:5px;}
+.row4 button{padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: azure;
+    
+background-color: blue;}

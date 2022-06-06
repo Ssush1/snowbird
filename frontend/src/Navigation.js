@@ -4,6 +4,7 @@ import Users from './Users'
 import AddSprint from './AddSprint'
 import Sprints from './Sprints'
 import Task from './Task'
+import Newlogin from './newpro/Newlogin'
 
 function Navigation() {
   return (
@@ -15,6 +16,8 @@ function Navigation() {
           <Route path="/AddSprint" element={<AddSprint />}></Route>
           <Route path="/EditSprint" element={<EditSprint />}></Route>
           <Route path="/Task" element={<Task />}></Route>
+          <Route path="/Newlogin" element={< Newlogin/>}></Route>
+
         </Routes>
       </BrowserRouter>
     </div>

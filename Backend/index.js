@@ -24,7 +24,7 @@ con.connect(function (err) {
 
 app.post('/fetchuserRole', function (req, res) {
   var sql =
-    "select tu.id,tu.txtUserName,tr.txtUserrole from tblusers tu join tbluserroles tr on tu.RefUserRole=tr.id order by tu.id asc;"
+    'select tu.id,tu.txtUserName,tr.txtUserrole from tblusers tu join tbluserroles tr on tu.RefUserRole=tr.id order by tu.id asc;'
 
   con.query(sql, function (err, result) {
     if (err) throw err
@@ -162,7 +162,24 @@ app.post('/fetchsprintlist', function (req, res) {
 app.post('/fetchsprintwisetasklist', function (req, res) {
   var Sid = req.body.refsprintid
   var sql =
-    " select txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks where refsprintid='"+Sid+"';"
+    " select txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks where refsprintid='" +
+    Sid +
+    "';"
+
+  con.query(sql, function (err, result) {
+    if (err) throw err
+    else {
+      res.send(result)
+    }
+  })
+})
+/*API for Fetch Sprintdetails as per sprintid*/
+app.post('/sprintdetails', function (req, res) {
+  var Sid = req.body.Id
+  var sql =
+    "select txtSprintname,dtActstartdate,dtActenddate from tblsprints where Id='" +
+    Sid +
+    "';"
 
   con.query(sql, function (err, result) {
     if (err) throw err
@@ -176,9 +193,8 @@ app.post('/fetchsprintwisetasklist', function (req, res) {
 
 app.post('/fetchTasklist', function (req, res) {
   var sql =
-    "select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id) join tblprojects pr on pr.id=ep.refprojectid) order by id asc;"
-con.query(sql, function (err, result) {
-  
+    'select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id) join tblprojects pr on pr.id=ep.refprojectid) order by id asc;'
+  con.query(sql, function (err, result) {
     if (err) throw err
     else {
       res.send(result)
@@ -199,7 +215,7 @@ app.post('/InsertTask', function (req, res) {
   // console.log(Refepicid)
   // console.log(Refsprintid)
   // console.log(Assignedto)
-  
+
   var sql =
     "insert into tbltasks (txtTitle,txtDesc,txtStatus,refepicid,refAssignee,refsprintid) values('" +
     Tname +
@@ -208,14 +224,18 @@ app.post('/InsertTask', function (req, res) {
     "','" +
     Status +
     "','" +
-    Refepicid +"','"+ Refsprintid +"','"+ Assignedto +"')";
-    
+    Refepicid +
+    "','" +
+    Refsprintid +
+    "','" +
+    Assignedto +
+    "')"
 
   con.query(sql, function (err, result) {
     if (err) throw err
     else {
       res.send(result)
-      }
+    }
   })
 })
 
@@ -225,8 +245,7 @@ app.post('/updatetask', function (req, res) {
   var Status = req.body.txtStatus
   var ID = req.body.id
   var sql =
-    "update tbltasks set txtStatus ='"+Status+"' where id='"+ID+"'";
-    
+    "update tbltasks set txtStatus ='" + Status + "' where id='" + ID + "'"
 
   con.query(sql, function (err, result) {
     if (err) throw err
