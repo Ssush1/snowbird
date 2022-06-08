@@ -117,19 +117,22 @@ app.post('/updatesprint', function (req, res) {
 
 app.post('/InsertSprint', function (req, res) {
   var Sname = req.body.txtSprintname
-  var Stdate = req.body.stdate
-  var Enddate = req.body.enddate
+  var Desc = req.body.Description
+  var assign = req.body.txtUsername
+  var Status = req.body.Status
   var Acstdate = req.body.acstdate
   var Acenddate = req.body.acenddate
 
   //var sql1 = "Select id from tblusers where txtUsername='" + uname + "';"
   var sql =
-    "Insert into tblsprints(txtSprintname,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate) values('" +
+    "Insert into tblsprints(txtSprintname,Description,txtUsername,Status,dtActstartdate,dtActenddate) values('" +
     Sname +
     "' ,'" +
-    Stdate +
+    Desc +
     "','" +
-    Enddate +
+    assign +
+    "','" +
+    Status +
     "','" +
     Acstdate +
     "','" +
@@ -177,7 +180,7 @@ app.post('/fetchsprintwisetasklist', function (req, res) {
 app.post('/sprintdetails', function (req, res) {
   var Sid = req.body.Id
   var sql =
-    "select txtSprintname,dtActstartdate,dtActenddate from tblsprints where Id='" +
+    "select txtSprintname,Description,txtUsername,Status,dtActstartdate,dtActenddate from tblsprints where Id='" +
     Sid +
     "';"
 

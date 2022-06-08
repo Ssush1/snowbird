@@ -31,8 +31,11 @@ function AddSprint() {
     var url = 'http://localhost:8000/insertSprint'
     var request = {
       txtSprintname: Sprintname,
-      stdate: fromdate,
-      enddate: todate,
+      Description:Description,
+      Status: Status,
+      txtUserName:assignedto,
+      dtActstartdate:fromdate,
+      dtactenddate: todate,
     }
     console.log(request)
     var header = {}
@@ -64,7 +67,7 @@ function AddSprint() {
             <div className="as_sc_row1_cl2">
               <button onClick={handleclick}>SAVE</button>
             </div>
-          </div>
+             </div>
           <div className="as_sc_row2">
             <div className="as_sc_row2_cl1">
               <label>Title</label>
@@ -78,7 +81,9 @@ function AddSprint() {
 
             <div className="as_sc_row2_cl2">
               <label>Description</label>
-              <textarea rows="8" cols="60"></textarea>
+              <textarea rows="8" cols="60" onChange={(e) => {
+                  setdescription(e.target.value)}}
+                ></textarea>
             </div>
           </div>
           <div className="as_sc_row3">

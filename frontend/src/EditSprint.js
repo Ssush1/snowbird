@@ -6,15 +6,20 @@ import Menu from './Menu'
 
 function EditSprint() {
   // const [options, setOption] = useState([])
-  const [txtSprintname, settextSprintname] = useState()
+  const [txtSprintname, settextSprintname] = useState('')
   const [Description, setdescription] = useState('')
-  const [Status, setStatus] = useState('')
-  const [assignedto, settxtUserName] = useState('')
-  const [todate, setdtActenddate] = useState('')
-  const [fromdate, setdtActstartdate] = useState('')
+  const [Status, setStatus] = useState([])
+  const [txtUserName, settxtUserName] = useState('')
+  const [dtActstartdate, setdtActenddate] = useState('')
+  const [dtActenddate, setdtActstartdate] = useState('')
   const [array, setArray] = useState([])
   const [taskarray, settaskarray] = useState([])
-  const [statarray, setstatarray] = useState([])
+  const [statarray, setstatarray] = useState([
+    { Id: 1, Status: 'To Do' },
+    { Id: 2, Status: 'In Progress' },
+    { Id: 3, Status: 'Review' },
+    { Id: 4, Status: 'Completed' },
+  ])
   const [sparray, setsparray] = useState([])
   const navigate = useNavigate()
   const [Id, setid] = useState('')
@@ -22,10 +27,10 @@ function EditSprint() {
   useEffect(() => {
     //localStorage.getItem(Id)
     var tempid = localStorage.getItem('spid')
-    //console.log(tempid)
+    console.log(tempid)
     setid(tempid)
     var url = 'http://localhost:8000/sprintdetails'
-    var req = {Id}
+    var req = { Id: tempid }
     var header = {}
     axios
       .post(url, req, header)
@@ -35,6 +40,9 @@ function EditSprint() {
         setsparray(res.data)
 
         settextSprintname(res.data[0].txtSprintname)
+        setdescription(res.data[0].Description)
+        setStatus(res.data[0].Status)
+        settxtUserName(res.data[0].txtUserName)
         setdtActstartdate(res.data[0].dtActstartdate)
         setdtActenddate(res.data[0].dtActenddate)
       })
@@ -44,12 +52,12 @@ function EditSprint() {
   function handleclick() {
     var url = 'http://localhost:8000/updatesprint'
     var request = {
-      // txtSprintname: Sprintname,
-      desc: Description,
-      dtActstartdate: fromdate,
-      dtActenddate: todate,
-      status: Status,
-      Assigned: assignedto,
+      txtSprintname: txtSprintname,
+      Description: Description,
+      dtActstartdate: dtActstartdate,
+      dtActenddate: dtActenddate,
+      Status: Status,
+      txtUserName: txtUserName,
     }
     // console.log(request)
     var header = {}
@@ -102,6 +110,7 @@ function EditSprint() {
               <textarea
                 rows="8"
                 cols="60"
+                value={Description}
                 onChange={(e) => {
                   setdescription(e.target.value)
                 }}
@@ -114,15 +123,18 @@ function EditSprint() {
 
               <select
                 className="as_sc_dropbox1"
+                value={Status}
                 onChange={(e) => {
                   setStatus(e.target.value)
                 }}
               >
-                <option>--options--</option>
-                <option value="">To do</option>
-                <option value="">In Progress</option>
-                <option value="">Review</option>
-                <option value="">Completed</option>
+                {statarray.map((stitem, stindex) => {
+                  return (
+                    <>
+                      <option value={stitem.Id}>{stitem.Status}</option>
+                    </>
+                  )
+                })}
               </select>
             </div>
             <div className="as_sc_row3_cl2">
@@ -146,10 +158,13 @@ function EditSprint() {
           <div className="as_sc_row4">
             <div className="as_sc_row4_cl1">
               <label>From date</label>
+
               <input
                 type="date"
-                onChange={(e) => {
-                  setdtActstartdate(e.target.value)
+                placeholder
+                text={dtActstartdate}
+                onChange={(date) => {
+                  setdtActstartdate(date)
                 }}
               />
             </div>
