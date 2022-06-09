@@ -120,8 +120,8 @@ app.post('/InsertSprint', function (req, res) {
   var Desc = req.body.Description
   var assign = req.body.txtUsername
   var Status = req.body.Status
-  var Acstdate = req.body.acstdate
-  var Acenddate = req.body.acenddate
+  var Acstdate = req.body.dtActdate
+  var Acenddate = req.body.dtActenddate
 
   //var sql1 = "Select id from tblusers where txtUsername='" + uname + "';"
   var sql =
@@ -142,6 +142,7 @@ app.post('/InsertSprint', function (req, res) {
   con.query(sql, function (err, result) {
     if (err) throw err
     else {
+      console.log(Acstdate)
       res.send(result)
     }
   })

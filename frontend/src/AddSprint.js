@@ -10,8 +10,14 @@ function AddSprint() {
   const [assignedto, settxtUserName] = useState('')
   const [todate, settodate] = useState(new Date())
   const [fromdate, setfromdate] = useState(new Date())
-  const [Status, setstatus] = useState('')
+  const [Status, setStatus] = useState('')
   const [array, setArray] = useState([])
+  const [statarray, setstatarray] = useState([
+    { Id: 1, Status: 'To Do' },
+    { Id: 2, Status: 'In Progress' },
+    { Id: 3, Status: 'Review' },
+    { Id: 4, Status: 'Completed' },
+  ])
   // const [taskarray, settaskarray] = useState([])
 
   const navigate = useNavigate()
@@ -28,25 +34,27 @@ function AddSprint() {
   }, [])
 
   function handleclick() {
+    console.log(Status)
     var url = 'http://localhost:8000/insertSprint'
     var request = {
       txtSprintname: Sprintname,
       Description:Description,
       Status: Status,
       txtUserName:assignedto,
-      dtActstartdate:fromdate,
-      dtactenddate: todate,
+      dtActdate:fromdate,
+      dtActenddate: todate
     }
-    console.log(request)
     var header = {}
 
     axios
       .post(url, request, header)
       .then((res) => {
-        console.log('result' + JSON.stringify(res.data))
-        if (res.data !== 'undefined') {
+        console.log(request.dtActenddate)
+        if (res.data) 
+          console.log('g1' + JSON.stringify(res.data))
+          console.log(request.dtActenddate)
           alert('added new sprint')
-        }
+        
       })
       .catch()
   }
@@ -89,14 +97,30 @@ function AddSprint() {
           <div className="as_sc_row3">
             <div className="as_sc_row3_cl1">
               <label>Status</label>
+              <select
+                className="as_sc_dropbox1"
+               // value={Status}
+                onChange={(e) => {
+                  setStatus(e.target.value)
+                }}
+              >
+                {statarray.map((stitem, stindex) => {
+                  return (
+                    <>
+                      <option value={stitem.Status}>{stitem.Status}</option>
+                    </>
+                  )
+                })} 
+                
+              </select>
 
-              <select className="as_sc_dropbox1">
+              {/* <select className="as_sc_dropbox1">
                 <option>--options--</option>
                 <option>To do</option>
                 <option>In Progress</option>
                 <option>Review</option>
                 <option>Completed</option>
-              </select>
+              </select> */}
             </div>
             <div className="as_sc_row3_cl2">
               <label>Assigned to</label>
@@ -120,7 +144,7 @@ function AddSprint() {
             <div className="as_sc_row4_cl1">
               <label>From date</label>
               <input
-                type="date"
+                type="datetime-local"
                 onChange={(e) => {
                   setfromdate(e.target.value)
                 }}
@@ -129,7 +153,7 @@ function AddSprint() {
             <div className="as_sc_row4_cl2">
               <label>To date</label>
               <input
-                type="date"
+                type="datetime-local"
                 onChange={(e) => {
                   settodate(e.target.value)
                 }}

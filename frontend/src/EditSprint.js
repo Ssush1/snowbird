@@ -6,12 +6,12 @@ import Menu from './Menu'
 
 function EditSprint() {
   // const [options, setOption] = useState([])
-  const [txtSprintname, settextSprintname] = useState('')
-  const [Description, setdescription] = useState('')
-  const [Status, setStatus] = useState([])
-  const [txtUserName, settxtUserName] = useState('')
-  const [dtActstartdate, setdtActenddate] = useState('')
-  const [dtActenddate, setdtActstartdate] = useState('')
+  const [txtSprintname, settextSprintname] = useState("")
+  const [Description, setdescription] = useState("")
+  const [Status, setStatus] = useState("")
+  const [txtUserName, settxtUserName] = useState("")
+  const [fromdate, setdtActenddate] = useState(Date)
+  const [todate, setdtActstartdate] = useState(Date)
   const [array, setArray] = useState([])
   const [taskarray, settaskarray] = useState([])
   const [statarray, setstatarray] = useState([
@@ -27,7 +27,7 @@ function EditSprint() {
   useEffect(() => {
     //localStorage.getItem(Id)
     var tempid = localStorage.getItem('spid')
-    console.log(tempid)
+    //console.log(tempid)
     setid(tempid)
     var url = 'http://localhost:8000/sprintdetails'
     var req = { Id: tempid }
@@ -36,7 +36,7 @@ function EditSprint() {
       .post(url, req, header)
       .then((res) => {
         //console.log(JSON.stringify(req))
-        console.log('response' + JSON.stringify(res.data))
+        //console.log('response' + JSON.stringify(res.data))
         setsparray(res.data)
 
         settextSprintname(res.data[0].txtSprintname)
@@ -49,29 +49,29 @@ function EditSprint() {
       .catch()
   }, [])
 
-  function handleclick() {
-    var url = 'http://localhost:8000/updatesprint'
-    var request = {
-      txtSprintname: txtSprintname,
-      Description: Description,
-      dtActstartdate: dtActstartdate,
-      dtActenddate: dtActenddate,
-      Status: Status,
-      txtUserName: txtUserName,
-    }
-    // console.log(request)
-    var header = {}
+  // function handleclick() {
+  //   var url = 'http://localhost:8000/updatesprint'
+  //   var request = {
+  //     txtSprintname: txtSprintname,
+  //     Description: Description,
+  //     dtActstartdate: fromdate,
+  //     dtActenddate: todate,
+  //     Status: Status,
+  //     assignedto: txtUserName,
+  //   }
+  //   // console.log(request)
+  //   var header = {}
 
-    axios
-      .post(url, request, header)
-      .then((res) => {
-        // console.log('result' + JSON.stringify(res.data))
-        if (res.data !== 'undefined') {
-          alert('updated sprint')
-        }
-      })
-      .catch()
-  }
+  //   axios
+  //     .post(url, request, header)
+  //     .then((res) => {
+  //       // console.log('result' + JSON.stringify(res.data))
+  //       if (res.data !== 'undefined') {
+  //         alert('updated sprint')
+  //       }
+  //     })
+  //     .catch()
+  // }
   function newClick() {
     navigate('/Task')
   }
@@ -90,7 +90,7 @@ function EditSprint() {
               <label>EditSprint</label>
             </div>
             <div className="as_sc_row1_cl2">
-              <button onClick={handleclick}>SAVE</button>
+              {/* <button onClick={handleclick}>SAVE</button> */}
             </div>
           </div>
           <div className="as_sc_row2">
@@ -123,7 +123,7 @@ function EditSprint() {
 
               <select
                 className="as_sc_dropbox1"
-                value={Status}
+               // value={Status}
                 onChange={(e) => {
                   setStatus(e.target.value)
                 }}
@@ -134,13 +134,15 @@ function EditSprint() {
                       <option value={stitem.Id}>{stitem.Status}</option>
                     </>
                   )
-                })}
+                })} 
+                
               </select>
             </div>
             <div className="as_sc_row3_cl2">
               <label>Assigned to</label>
               <select
                 className="as_sc_dropbox2"
+                value={txtUserName}
                 onChange={(e) => {
                   settxtUserName(e.target.value)
                 }}
@@ -162,7 +164,7 @@ function EditSprint() {
               <input
                 type="date"
                 placeholder
-                text={dtActstartdate}
+                text={fromdate}
                 onChange={(date) => {
                   setdtActstartdate(date)
                 }}
