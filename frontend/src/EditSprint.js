@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react'
 import Menu from './Menu'
 
 function EditSprint() {
-  // const [options, setOption] = useState([])
-  const [txtSprintname, settextSprintname] = useState("")
+ const [options, setOption] = useState([])
+  const [Sprintname, settextSprintname] = useState("")
   const [Description, setdescription] = useState("")
   const [Status, setStatus] = useState("")
-  const [txtUserName, settxtUserName] = useState("")
-  const [fromdate, setdtActenddate] = useState(Date)
-  const [todate, setdtActstartdate] = useState(Date)
+  const [assignedto, settxtUserName] = useState("")
+  const [fromdate, setfromdate] = useState(new Date())
+  const [todate, settodate] = useState(new Date())
   const [array, setArray] = useState([])
   const [taskarray, settaskarray] = useState([])
   const [statarray, setstatarray] = useState([
@@ -43,7 +43,7 @@ function EditSprint() {
         setdescription(res.data[0].Description)
         setStatus(res.data[0].Status)
         settxtUserName(res.data[0].txtUserName)
-        setdtActstartdate(res.data[0].dtActstartdate)
+        setdtActstartdate(res.data[0].dtActdate)
         setdtActenddate(res.data[0].dtActenddate)
       })
       .catch()

@@ -40,7 +40,7 @@ function AddSprint() {
       txtSprintname: Sprintname,
       Description:Description,
       Status: Status,
-      txtUserName:assignedto,
+      txtUsername:assignedto,
       dtActdate:fromdate,
       dtActenddate: todate
     }
@@ -133,7 +133,7 @@ function AddSprint() {
                 {array.map((item, index) => {
                   return (
                     <>
-                      <option value={item.id}>{item.txtUserName}</option>
+                      <option value={item.txtUserName}>{item.txtUserName}</option>
                     </>
                   )
                 })}
