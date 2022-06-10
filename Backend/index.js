@@ -98,12 +98,18 @@ app.post('/updateuser', function (req, res) {
 /*API for Update Sprint*/
 
 app.post('/updatesprint', function (req, res) {
+  console.log(req.body.dtActdate)
   var Sprint = req.body.txtSprintname
-  var id = req.body.id
+  var Description=req.body.Description
+  var Status =req.body.Status
+  var txtUserName=req.body.txtUsername
+  var actualdt=req.body.dtActdate
+  var Enddate=req.body.dtActenddate
+  var id = req.body.Id
   var sql =
     "UPDATE tblsprints SET txtSprintname='" +
     Sprint +
-    "' WHERE id='" +
+    "',Description='"+Description+"',Status ='"+Status+"',txtUserName='"+txtUserName+"',dtActstartdate='"+actualdt+"',dtActenddate='"+Enddate+"'WHERE id='" +
     id +
     "';"
 
@@ -161,14 +167,12 @@ app.post('/fetchsprintlist', function (req, res) {
   })
 })
 
-/*API for Fetch Sprintwisetasklist*/
+/*API for Fetch FetchTasklist*/
 
-app.post('/fetchsprintwisetasklist', function (req, res) {
-  var Sid = req.body.refsprintid
-  var sql =
-    " select txtTitle,txtDesc,txtStatus,refepicid,refAssignee,dtEststartdate,dtestenddate,dtActstartdate,dtActenddate from tbltasks where refsprintid='" +
-    Sid +
-    "';"
+app.post('/fetchtask', function (req, res) {
+  
+  var sql ="select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id)join tblprojects pr on pr.id=ep.refprojectid) order by ta.id asc;"
+    
 
   con.query(sql, function (err, result) {
     if (err) throw err
@@ -193,11 +197,15 @@ app.post('/sprintdetails', function (req, res) {
   })
 })
 
-/*API for Fetch FetchTasklist*/
 
-app.post('/fetchTasklist', function (req, res) {
+/*API for Fetch Sprintwisetasklist*/
+
+app.post('/fetchsprintwisetasklist', function (req, res) {
+  var Sprintid = req.body.Id
   var sql =
-    'select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id) join tblprojects pr on pr.id=ep.refprojectid) order by id asc;'
+  "select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id)join tblprojects pr on pr.id=ep.refprojectid) where refsprintid='" +
+  Sprintid +
+  "';"
   con.query(sql, function (err, result) {
     if (err) throw err
     else {

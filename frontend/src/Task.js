@@ -15,7 +15,7 @@ function Task() {
   }
 
   useEffect(() => {
-    var url = 'http://localhost:8000/fetchtasklist'
+    var url = 'http://localhost:8000/fetchtask'
     var request = {}
     var header = {}
 

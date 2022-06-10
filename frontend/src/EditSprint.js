@@ -3,15 +3,17 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Menu from './Menu'
+//import DatePicker from "react-datepicker";
+//import "react-datepicker/dist/react-datepicker.css";
 
 function EditSprint() {
- const [options, setOption] = useState([])
-  const [Sprintname, settextSprintname] = useState("")
-  const [Description, setdescription] = useState("")
-  const [Status, setStatus] = useState("")
-  const [assignedto, settxtUserName] = useState("")
-  const [fromdate, setfromdate] = useState(new Date())
-  const [todate, settodate] = useState(new Date())
+  const [options, setOption] = useState([])
+  const [Sprintname, settextSprintname] = useState('')
+  const [Description, setdescription] = useState('')
+  const [Status, setStatus] = useState('')
+  const [assignedto, settxtUserName] = useState([])
+  const [fromdate, setdtActstartdate] = useState('2022-06-30')
+  const [todate, setdtActenddate] = useState()
   const [array, setArray] = useState([])
   const [taskarray, settaskarray] = useState([])
   const [statarray, setstatarray] = useState([
@@ -29,52 +31,82 @@ function EditSprint() {
     var tempid = localStorage.getItem('spid')
     //console.log(tempid)
     setid(tempid)
-    var url = 'http://localhost:8000/sprintdetails'
-    var req = { Id: tempid }
+
+    var url = 'http://localhost:8000/fetchuser'
+    var req = {}
     var header = {}
     axios
       .post(url, req, header)
       .then((res) => {
-        //console.log(JSON.stringify(req))
-        //console.log('response' + JSON.stringify(res.data))
+        setArray(res.data)
+      })
+      .catch()
+    
+    var url1 = 'http://localhost:8000/sprintdetails'
+    var req1 = { Id: tempid }
+    var header1 = {}
+    axios
+      .post(url1, req1, header1)
+      .then((res) => {
+        //alert('hi')
+        //console.log(JSON.stringify(req1))
+        console.log('response' + JSON.stringify(res.data))
+       
         setsparray(res.data)
 
         settextSprintname(res.data[0].txtSprintname)
         setdescription(res.data[0].Description)
         setStatus(res.data[0].Status)
-        settxtUserName(res.data[0].txtUserName)
-        setdtActstartdate(res.data[0].dtActdate)
+        settxtUserName(res.data[0].assignedto)
+        setdtActstartdate(res.data[0].dtActstartdate)
         setdtActenddate(res.data[0].dtActenddate)
+        console.log("hi"+res.data[0].dtActenddate)
+      })
+      .catch()
+      var url2 = 'http://localhost:8000/fetchsprintwisetasklist'
+    var req2 = {Id:tempid}
+    var header2 = {}
+    axios
+      .post(url2, req2, header2)
+      .then((res) => {
+        // console.log(res)
+        settaskarray(res.data)
+      
       })
       .catch()
   }, [])
 
-  // function handleclick() {
-  //   var url = 'http://localhost:8000/updatesprint'
-  //   var request = {
-  //     txtSprintname: txtSprintname,
-  //     Description: Description,
-  //     dtActstartdate: fromdate,
-  //     dtActenddate: todate,
-  //     Status: Status,
-  //     assignedto: txtUserName,
-  //   }
-  //   // console.log(request)
-  //   var header = {}
+  function handleclick() {
+    console.log(fromdate)
+    var url = 'http://localhost:8000/updatesprint'
+    var request = {
+      Id: Id,
+      txtSprintname: Sprintname,
+      Description: Description,
+      dtActdate: fromdate,
+      dtActenddate: todate,
+      Status: Status,
+      txtUsername: assignedto,
+    }
+    // console.log(request)
+    var header = {}
 
-  //   axios
-  //     .post(url, request, header)
-  //     .then((res) => {
-  //       // console.log('result' + JSON.stringify(res.data))
-  //       if (res.data !== 'undefined') {
-  //         alert('updated sprint')
-  //       }
-  //     })
-  //     .catch()
-  // }
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        // console.log('result' + JSON.stringify(res.data))
+        if (res.data !== 'undefined') {
+          alert('updated sprint')
+        }
+      })
+      .catch()
+  }
   function newClick() {
     navigate('/Task')
   }
+  // function newClick() {
+  //   navigate('/EditTask')
+  // }
 
   return (
     <div className="outer">
@@ -90,7 +122,7 @@ function EditSprint() {
               <label>EditSprint</label>
             </div>
             <div className="as_sc_row1_cl2">
-              {/* <button onClick={handleclick}>SAVE</button> */}
+              <button onClick={handleclick}>SAVE</button>
             </div>
           </div>
           <div className="as_sc_row2">
@@ -98,7 +130,7 @@ function EditSprint() {
               <label>Title</label>
               <input
                 type="text"
-                value={txtSprintname}
+                value={Sprintname}
                 onChange={(e) => {
                   settextSprintname(e.target.value)
                 }}
@@ -123,7 +155,7 @@ function EditSprint() {
 
               <select
                 className="as_sc_dropbox1"
-               // value={Status}
+                value={Status}
                 onChange={(e) => {
                   setStatus(e.target.value)
                 }}
@@ -131,18 +163,17 @@ function EditSprint() {
                 {statarray.map((stitem, stindex) => {
                   return (
                     <>
-                      <option value={stitem.Id}>{stitem.Status}</option>
+                      <option value={stitem.Status}>{stitem.Status}</option>
                     </>
                   )
-                })} 
-                
+                })}
               </select>
             </div>
             <div className="as_sc_row3_cl2">
               <label>Assigned to</label>
               <select
                 className="as_sc_dropbox2"
-                value={txtUserName}
+                value={assignedto}
                 onChange={(e) => {
                   settxtUserName(e.target.value)
                 }}
@@ -150,7 +181,9 @@ function EditSprint() {
                 {array.map((item, index) => {
                   return (
                     <>
-                      <option value={item.id}>{item.txtUserName}</option>
+                      <option value={item.txtUserName}>
+                        {item.txtUserName}
+                      </option>
                     </>
                   )
                 })}
@@ -160,20 +193,22 @@ function EditSprint() {
           <div className="as_sc_row4">
             <div className="as_sc_row4_cl1">
               <label>From date</label>
-
+              {/* <DatePicker selected={fromdate} onChange={date => setdtActstartdate(date)} /> */}
+ 
               <input
-                type="date"
-                placeholder
-                text={fromdate}
-                onChange={(date) => {
-                  setdtActstartdate(date)
+                type="date-time local"
+                
+                value={fromdate}
+                onChange={(e) => {
+                  setdtActstartdate(e.target.value)
                 }}
               />
             </div>
             <div className="as_sc_row4_cl2">
               <label>To date</label>
               <input
-                type="date"
+                type="date-time local"
+                value={todate}
                 onChange={(e) => {
                   setdtActenddate(e.target.value)
                 }}
@@ -202,12 +237,12 @@ function EditSprint() {
             {taskarray.map((item, index) => {
               return (
                 <>
-                  <tr onClick={newClick}>
-                    <td className="tbdata">{item.Id}</td>
-                    <td>{item.txttaskname}</td>
-                    <td>{item.status}</td>
-                    <td>{item.epicname}</td>
-                    <td>{item.projectname}</td>
+                  <tr>
+                    <td className="tbdata">{item.id}</td>
+                    <td>{item.txtTitle}</td>
+                    <td>{item.txtStatus}</td>
+                    <td>{item.EpicName}</td>
+                    <td>{item.txtName}</td>
                   </tr>
                 </>
               )

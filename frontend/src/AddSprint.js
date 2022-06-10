@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Menu from './Menu'
+
 function AddSprint() {
   const [options, setOption] = useState([])
   const [Sprintname, settextSprintname] = useState('')
@@ -51,8 +52,8 @@ function AddSprint() {
       .then((res) => {
         console.log(request.dtActenddate)
         if (res.data) 
-          console.log('g1' + JSON.stringify(res.data))
-          console.log(request.dtActenddate)
+          //console.log('g1' + JSON.stringify(res.data))
+          //console.log(request.dtActenddate)
           alert('added new sprint')
         
       })
