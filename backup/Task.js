@@ -15,7 +15,7 @@ function Task() {
   }
 
   useEffect(() => {
-    var url = 'https://0d7azoksze.execute-api.us-west-2.amazonaws.com/default/Taskfetch'
+    var url = 'http://localhost:8000/fetchtask'
     var request = {}
     var header = {}
 

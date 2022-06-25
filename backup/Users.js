@@ -1,29 +1,29 @@
-import './style.css'
 import axios from 'axios'
+import './style.css'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Menu from './Menu'
 
-function Task() {
+function Users() {
   const navigate = useNavigate()
-  const [taskarray, settaskarray] = useState([])
   function handleClick() {
-    navigate('/AddTask')
+    navigate('/AddUser')
   }
   function newClick() {
-    navigate('/EditTask')
+    navigate('/EditUser')
   }
 
+  const [array, setarray] = useState([])
   useEffect(() => {
-    var url = 'https://0d7azoksze.execute-api.us-west-2.amazonaws.com/default/Taskfetch'
     var request = {}
     var header = {}
+    var url = 'http://localhost:8000/fetchuserRole'
 
     axios
       .post(url, request, header)
       .then((res) => {
-        //console.log(res.data)
-        settaskarray(res.data)
+        console.log(res.data)
+        setarray(res.data)
       })
       .catch((err) => {
         console.log(err)
@@ -41,47 +41,41 @@ function Task() {
         <div className="secondrow">
           {/* Side navigation menu */}
           {<Menu />}
-          {/* Main outline */}
           <div className="secondcolumn">
             <div className="prowone">
-              <label>Task</label>
-              <button onClick={handleClick}>Add Task</button>
+              <label>Users</label>
+              <button onClick={handleClick}>Create New</button>
             </div>
-
             <table className="tablerow">
               <tr className="TblFirstrow">
-                <th>#id</th>
-                <th>Task</th>
-                <th>Status</th>
-                <th>Epic</th>
-                <th>ProjectName</th>
+                <th className="tblId">Id</th>
+                <th className="tblusers">Users</th>
+                <th className="tblrole">UserRoles</th>
               </tr>
-              {taskarray.map((item, index) => {
+
+              {array.map((item, index) => {
                 return (
                   <>
                     <tr onClick={newClick}>
-                      <td className="tbdata">{item.id}</td>
-                      <td>{item.txtTitle}</td>
-                      <td>{item.txtStatus}</td>
-                      <td>{item.EpicName}</td>
-                      <td>{item.txtName}</td>
+                      <td>{item.id}</td>
+                      <td>{item.txtUserName}</td>
+                      <td>{item.txtUserrole}</td>
                     </tr>
                   </>
                 )
               })}
             </table>
-          </div>
 
-          <div className="pbutton">
-            <button>1</button>
-            <button>2</button>
-            <button>...</button>
-            <button>10</button>
+            <div className="pbutton">
+              <button>1</button>
+              <button>2</button>
+              <button>...</button>
+              <button>10</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   )
 }
-
-export default Task
+export default Users

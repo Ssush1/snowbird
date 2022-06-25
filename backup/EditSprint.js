@@ -7,13 +7,13 @@ import Menu from './Menu'
 //import "react-datepicker/dist/react-datepicker.css";
 
 function EditSprint() {
-  // const [options, setOption] = useState([])
+  const [options, setOption] = useState([])
   const [Sprintname, settextSprintname] = useState('')
   const [Description, setdescription] = useState('')
   const [Status, setStatus] = useState('')
   const [assignedto, settxtUserName] = useState([])
-  const [fromdate, setdtActstartdate] = useState(Date)
-  const [todate, setdtActenddate] = useState(Date)
+  const [fromdate, setdtActstartdate] = useState('2022-06-30')
+  const [todate, setdtActenddate] = useState()
   const [array, setArray] = useState([])
   const [taskarray, settaskarray] = useState([])
   const [statarray, setstatarray] = useState([
@@ -41,7 +41,7 @@ function EditSprint() {
         setArray(res.data)
       })
       .catch()
-
+    
     var url1 = 'http://localhost:8000/sprintdetails'
     var req1 = { Id: tempid }
     var header1 = {}
@@ -51,7 +51,7 @@ function EditSprint() {
         //alert('hi')
         //console.log(JSON.stringify(req1))
         console.log('response' + JSON.stringify(res.data))
-
+       
         setsparray(res.data)
 
         settextSprintname(res.data[0].txtSprintname)
@@ -60,17 +60,18 @@ function EditSprint() {
         settxtUserName(res.data[0].assignedto)
         setdtActstartdate(res.data[0].dtActstartdate)
         setdtActenddate(res.data[0].dtActenddate)
-        console.log('hi' + res.data[0].dtActenddate)
+        console.log("hi"+res.data[0].dtActenddate)
       })
       .catch()
-    var url2 = 'http://localhost:8000/fetchsprintwisetasklist'
-    var req2 = { Id: tempid }
+      var url2 = 'http://localhost:8000/fetchsprintwisetasklist'
+    var req2 = {Id:tempid}
     var header2 = {}
     axios
       .post(url2, req2, header2)
       .then((res) => {
         // console.log(res)
         settaskarray(res.data)
+      
       })
       .catch()
   }, [])
@@ -82,7 +83,7 @@ function EditSprint() {
       Id: Id,
       txtSprintname: Sprintname,
       Description: Description,
-      dtActstartdate: fromdate,
+      dtActdate: fromdate,
       dtActenddate: todate,
       Status: Status,
       txtUsername: assignedto,
@@ -193,9 +194,10 @@ function EditSprint() {
             <div className="as_sc_row4_cl1">
               <label>From date</label>
               {/* <DatePicker selected={fromdate} onChange={date => setdtActstartdate(date)} /> */}
-
+ 
               <input
-                type="datetime-local"
+                type="date-time local"
+                
                 value={fromdate}
                 onChange={(e) => {
                   setdtActstartdate(e.target.value)
@@ -205,7 +207,7 @@ function EditSprint() {
             <div className="as_sc_row4_cl2">
               <label>To date</label>
               <input
-                type="datetime-local"
+                type="date-time local"
                 value={todate}
                 onChange={(e) => {
                   setdtActenddate(e.target.value)

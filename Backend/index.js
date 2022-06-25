@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 8000
+const port = 5000
 const mysql = require('mysql')
 app.use(express.json())
 const cors = require('cors')
@@ -98,18 +98,28 @@ app.post('/updateuser', function (req, res) {
 /*API for Update Sprint*/
 
 app.post('/updatesprint', function (req, res) {
-  console.log(req.body.dtActdate)
+  console.log(req.body.dtActstartdate)
   var Sprint = req.body.txtSprintname
-  var Description=req.body.Description
-  var Status =req.body.Status
-  var txtUserName=req.body.txtUsername
-  var actualdt=req.body.dtActdate
-  var Enddate=req.body.dtActenddate
+  var Description = req.body.Description
+  var Status = req.body.Status
+  var txtUserName = req.body.txtUsername
+  var actualdt = req.body.dtActstartdate
+  var Enddate = req.body.dtActenddate
   var id = req.body.Id
   var sql =
     "UPDATE tblsprints SET txtSprintname='" +
     Sprint +
-    "',Description='"+Description+"',Status ='"+Status+"',txtUserName='"+txtUserName+"',dtActstartdate='"+actualdt+"',dtActenddate='"+Enddate+"'WHERE id='" +
+    "',Description='" +
+    Description +
+    "',Status ='" +
+    Status +
+    "',txtUserName='" +
+    txtUserName +
+    "',dtActstartdate='" +
+    actualdt +
+    "',dtActenddate='" +
+    Enddate +
+    "'WHERE id='" +
     id +
     "';"
 
@@ -128,10 +138,11 @@ app.post('/InsertSprint', function (req, res) {
   var Status = req.body.Status
   var Acstdate = req.body.dtActdate
   var Acenddate = req.body.dtActenddate
+  var tglState = req.body.togglestate
 
   //var sql1 = "Select id from tblusers where txtUsername='" + uname + "';"
   var sql =
-    "Insert into tblsprints(txtSprintname,Description,txtUsername,Status,dtActstartdate,dtActenddate) values('" +
+    "Insert into tblsprints(txtSprintname,Description,txtUsername,Status,dtActstartdate,dtActenddate,state) values('" +
     Sname +
     "' ,'" +
     Desc +
@@ -142,8 +153,7 @@ app.post('/InsertSprint', function (req, res) {
     "','" +
     Acstdate +
     "','" +
-    Acenddate +
-    "')"
+    Acenddate +"','" +tglState+"')"
 
   con.query(sql, function (err, result) {
     if (err) throw err
@@ -170,9 +180,8 @@ app.post('/fetchsprintlist', function (req, res) {
 /*API for Fetch FetchTasklist*/
 
 app.post('/fetchtask', function (req, res) {
-  
-  var sql ="select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id)join tblprojects pr on pr.id=ep.refprojectid) order by ta.id asc;"
-    
+  var sql =
+    'select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id)join tblprojects pr on pr.id=ep.refprojectid) order by ta.id asc;'
 
   con.query(sql, function (err, result) {
     if (err) throw err
@@ -197,15 +206,14 @@ app.post('/sprintdetails', function (req, res) {
   })
 })
 
-
 /*API for Fetch Sprintwisetasklist*/
 
 app.post('/fetchsprintwisetasklist', function (req, res) {
   var Sprintid = req.body.Id
   var sql =
-  "select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id)join tblprojects pr on pr.id=ep.refprojectid) where refsprintid='" +
-  Sprintid +
-  "';"
+    "select ta.id,ta.txtTitle,ta.txtStatus,ep.EpicName,pr.txtName from ((tbltasks ta join tblepics ep on ta.refepicid=ep.id)join tblprojects pr on pr.id=ep.refprojectid) where refsprintid='" +
+    Sprintid +
+    "';"
   con.query(sql, function (err, result) {
     if (err) throw err
     else {
@@ -265,6 +273,6 @@ app.post('/updatetask', function (req, res) {
   })
 })
 
-app.listen(8000, () => {
+app.listen(5000, () => {
   console.log('Server is running')
 })

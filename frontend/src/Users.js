@@ -17,13 +17,14 @@ function Users() {
   useEffect(() => {
     var request = {}
     var header = {}
-    var url = 'http://localhost:8000/fetchuserRole'
-
+    // var url = 'http://localhost:8000/fetchuserRole'
+    var url='https://nbeb55r1jk.execute-api.us-west-2.amazonaws.com/default/UserRolefetch'
     axios
       .post(url, request, header)
       .then((res) => {
         console.log(res.data)
         setarray(res.data)
+        // console.log(array)
       })
       .catch((err) => {
         console.log(err)
