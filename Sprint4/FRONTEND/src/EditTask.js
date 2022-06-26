@@ -2,6 +2,14 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react'
 import './styles/SnowBirdStyle.css'
+import { DiAptana } from "react-icons/di";
+import {AiOutlineApartment} from "react-icons/ai";
+import {AiOutlineLink} from "react-icons/ai";
+import { FcBookmark } from "react-icons/fc";
+import { FcFlashOn } from "react-icons/fc";
+import { BiSortDown} from "react-icons/bi";
+import { GrAttachment } from "react-icons/gr";
+import {HiOutlineUserCircle } from "react-icons/hi";
 function EditTask() {
   return (
     <div>
@@ -9,7 +17,7 @@ function EditTask() {
         {/* width:100% */}
         <div className="outer_row1">
           {/* width:50% */}
-          <div className="path">Test Epic/Test-5</div>
+          <div className="path"><FcFlashOn/>Test Epic/<FcBookmark/>Test-5</div>
           <div className="closeicon">{/* width:50% */}x</div>
         </div>
         <div className="outer_row2">
@@ -20,12 +28,13 @@ function EditTask() {
               <label className="column1_row1">EditTask</label>
             </div>
             <div className="column1_row2">
-              <button1>Attach</button1>
-              <button2>Add a child issue</button2>
-              <select>
-                <option value="Link issue">Link issue</option>
+              <button1><GrAttachment/>Attach</button1>
+              <button2><AiOutlineApartment/> Add a child issue</button2>
+              <button3><AiOutlineLink/> Link issue</button3>
+              <select className="select">
+                <option value=""></option>
               </select>
-              <button3>...</button3>
+              <button4>...</button4>
             </div>
             <div className="column1_row3">
               <label>Description</label>
@@ -47,7 +56,7 @@ function EditTask() {
               </div>
 
               <div className="row5_1">
-                <label>Newest First</label>
+                <label>Newest First <BiSortDown/></label>
               </div>
             </div>
             <div className="column1_row6">
@@ -63,7 +72,7 @@ function EditTask() {
           </div>
           <div className="outer_column2">
             <div className="column2_row1">
-              <select>
+              <select className='select1'>
                 <option value="To Do">To Do</option>
               </select>
             </div>
@@ -71,13 +80,13 @@ function EditTask() {
             <div className="column2_row3">
             <div className="column2_row3_1">
               <div className="list">Assignee</div>
-              <div className="list">Labels</div>
+              <div className="list">label</div>
               <div className="list">label</div>
               <div className="list">label</div>
               <div className="list">label</div>
             </div>
             <div className="column2_row3_2">
-              <div className="list">(icon)Unassigned</div>
+              <div className="list"><HiOutlineUserCircle/>Unassigned</div>
               <div className="list">None</div>
               <div className="list">label</div>
               <div className="list">label</div>
@@ -88,7 +97,7 @@ function EditTask() {
             </div>
             <div className="column3_row1">
             <label>created 9 minutes ago</label>
-            <label className="cl3row1">Configure</label>
+            <label className="cl3row1"><DiAptana/>Configure</label>
             </div>
             <div className="column3_row2"><label>uploaded 8 minutes ago</label></div>
           </div>
