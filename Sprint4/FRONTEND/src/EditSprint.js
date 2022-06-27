@@ -3,6 +3,15 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Menu from './Menu'
+import './styles/SnowBirdStyle.css'
+import { DiAptana } from "react-icons/di";
+import {AiOutlineApartment} from "react-icons/ai";
+import {AiOutlineLink} from "react-icons/ai";
+import { FcBookmark } from "react-icons/fc";
+import { FcFlashOn } from "react-icons/fc";
+import { BiSortDown} from "react-icons/bi";
+import { GrAttachment } from "react-icons/gr";
+import {HiOutlineUserCircle } from "react-icons/hi";
 //import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
 
@@ -108,151 +117,95 @@ function EditSprint() {
   // }
 
   return (
-    <div className="outer">
-      <div className="firstrow">
-        <div className="usericon"> </div>
-        <label>User</label>
-      </div>
-      <div className="secondrow">
-        {<Menu />}
-        <div className="as_sc">
-          <div className="as_sc_row1">
-            <div className="as_sc_row1_cl1">
-              <label>EditSprint</label>
+    <div>
+      <div className="outer">
+        {/* width:100% */}
+        <div className="outer_row1">
+          {/* width:50% */}
+          <div className="path"><FcFlashOn/>Test Epic/<FcBookmark/>Test-5</div>
+          <div className="closeicon">{/* width:50% */}x</div>
+        </div>
+        <div className="outer_row2">
+          {/* width:100% */}
+          <div className="outer_column1">
+            {/* width:60% */}
+            <div>
+              <label className="column1_row1">EditSprint</label>
             </div>
-            <div className="as_sc_row1_cl2">
-              <button onClick={handleclick}>SAVE</button>
+            <div className="column1_row2">
+              <button1><GrAttachment/>Attach</button1>
+              <button2><AiOutlineApartment/> Add a child issue</button2>
+              <button3><AiOutlineLink/> Link issue</button3>
+              <select className="select">
+                <option value=""></option>
+              </select>
+              <button4>...</button4>
             </div>
-          </div>
-          <div className="as_sc_row2">
-            <div className="as_sc_row2_cl1">
-              <label>Title</label>
-              <input
-                type="text"
-                value={Sprintname}
-                onChange={(e) => {
-                  settextSprintname(e.target.value)
-                }}
-              />
-            </div>
-
-            <div className="as_sc_row2_cl2">
+            <div className="column1_row3">
               <label>Description</label>
               <textarea
-                rows="8"
-                cols="60"
-                value={Description}
-                onChange={(e) => {
-                  setdescription(e.target.value)
-                }}
+                rows="10"
+                cols="200"
+                placeholder="Add a description..."
               ></textarea>
             </div>
-          </div>
-          <div className="as_sc_row3">
-            <div className="as_sc_row3_cl1">
-              <label>Status</label>
+            <div className="column1_row4">
+              <label>Activity</label>
+            </div>
+            <div className="column1_row5">
+              <div className="row5">
+                <button5>Show</button5>
+                <button6>All</button6>
+                <button7>Comments</button7>
+                <button8>History</button8>
+              </div>
 
-              <select
-                className="as_sc_dropbox1"
-                value={Status}
-                onChange={(e) => {
-                  setStatus(e.target.value)
-                }}
-              >
-                {statarray.map((stitem, stindex) => {
-                  return (
-                    <>
-                      <option value={stitem.Status}>{stitem.Status}</option>
-                    </>
-                  )
-                })}
+              <div className="row5_1">
+                <label>Newest First <BiSortDown/></label>
+              </div>
+            </div>
+            <div className="column1_row6">
+              <div className="row6"> A </div>
+              <div className="row7">
+                <textarea rows="10" cols="200"></textarea>
+              </div>
+            </div>
+            <div className="column1_row7">
+              <button9 className="row8">Save</button9>
+              <button10 className="row9">Cancel</button10>
+            </div>
+          </div>
+          <div className="outer_column2">
+            <div className="column2_row1">
+              <select className='select1'>
+                <option value="To Do">To Do</option>
               </select>
             </div>
-            <div className="as_sc_row3_cl2">
-              <label>Assigned to</label>
-              <select
-                className="as_sc_dropbox2"
-                value={assignedto}
-                onChange={(e) => {
-                  settxtUserName(e.target.value)
-                }}
-              >
-                {array.map((item, index) => {
-                  return (
-                    <>
-                      <option value={item.txtUserName}>
-                        {item.txtUserName}
-                      </option>
-                    </>
-                  )
-                })}
-              </select>
+            <div className="column2_row2">Details</div>
+            <div className="column2_row3">
+            <div className="column2_row3_1">
+              <div className="list">Assignee</div>
+              <div className="list">label</div>
+              <div className="list">label</div>
+              <div className="list">label</div>
+              <div className="list">label</div>
             </div>
+            <div className="column2_row3_2">
+              <div className="list"><HiOutlineUserCircle/>Unassigned</div>
+              <div className="list">None</div>
+              <div className="list">label</div>
+              <div className="list">label</div>
+              <div className="list">
+                <div className="list_A">A</div><div>label</div>
+              </div>
+            </div>
+            </div>
+            <div className="column3_row1">
+            <label>created 9 minutes ago</label>
+            <label className="cl3row1"><DiAptana/>Configure</label>
+            </div>
+            <div className="column3_row2"><label>uploaded 8 minutes ago</label></div>
           </div>
-          <div className="as_sc_row4">
-            <div className="as_sc_row4_cl1">
-              <label>From date</label>
-              {/* <DatePicker selected={fromdate} onChange={date => setdtActstartdate(date)} /> */}
-
-              <input
-                type="date-time local"
-                value={fromdate}
-                onChange={(e) => {
-                  setdtActstartdate(e.target.value)
-                }}
-              />
-            </div>
-            <div className="as_sc_row4_cl2">
-              <label>To date</label>
-              <input
-                type="date-time local"
-                value={todate}
-                onChange={(e) => {
-                  setdtActenddate(e.target.value)
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="as_sc_row7">
-            <div className="as_sc_row7_cl1">
-              <label>Task</label>
-            </div>
-            <div className="as_sc_row7_cl2">
-              <button onClick={newClick}>Add</button>
-            </div>
-          </div>
-          <div></div>
-          <table className="tablerow">
-            <tr className="TblFirstrow">
-              <th>#id</th>
-              <th>Task</th>
-              <th>Status</th>
-              <th>Epic Name</th>
-              <th>Project Name</th>
-            </tr>
-
-            {taskarray.map((item, index) => {
-              return (
-                <>
-                  <tr>
-                    <td className="tbdata">{item.id}</td>
-                    <td>{item.txtTitle}</td>
-                    <td>{item.txtStatus}</td>
-                    <td>{item.EpicName}</td>
-                    <td>{item.txtName}</td>
-                  </tr>
-                </>
-              )
-            })}
-          </table>
-        </div>
-
-        <div className="as_sc_row6">
-          <button>1</button>
-          <button>2</button>
-          <button>...</button>
-          <button>10</button>
         </div>
       </div>
     </div>

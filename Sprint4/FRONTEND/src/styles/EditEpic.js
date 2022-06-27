@@ -1,8 +1,6 @@
-import './css/addsprintstyle.css'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import Menu from './Menu'
+import axios from 'axios'
+import { useNavigate } from 'react'
 import './styles/SnowBirdStyle.css'
 import { DiAptana } from "react-icons/di";
 import {AiOutlineApartment} from "react-icons/ai";
@@ -12,62 +10,7 @@ import { FcFlashOn } from "react-icons/fc";
 import { BiSortDown} from "react-icons/bi";
 import { GrAttachment } from "react-icons/gr";
 import {HiOutlineUserCircle } from "react-icons/hi";
-
-function AddSprint() {
-  const [options, setOption] = useState([])
-  const [Sprintname, settextSprintname] = useState('')
-  const [Description, setdescription] = useState('')
-  const [assignedto, settxtUserName] = useState('')
-  const [todate, settodate] = useState(new Date())
-  const [fromdate, setfromdate] = useState(new Date())
-  const [Status, setStatus] = useState('')
-  const [array, setArray] = useState([])
-  const [statarray, setstatarray] = useState([
-    { Id: 1, Status: 'To Do' },
-    { Id: 2, Status: 'In Progress' },
-    { Id: 3, Status: 'Review' },
-    { Id: 4, Status: 'Completed' },
-  ])
-  // const [taskarray, settaskarray] = useState([])
-
-  const navigate = useNavigate()
-  useEffect(() => {
-    var url = 'http://localhost:8000/fetchuser'
-    var req = {}
-    var header = {}
-    axios
-      .post(url, req, header)
-      .then((res) => {
-        setArray(res.data)
-      })
-      .catch()
-  }, [])
-
-  function handleclick() {
-    console.log(Status)
-    var url = 'http://localhost:8000/insertSprint'
-    var request = {
-      txtSprintname: Sprintname,
-      Description: Description,
-      Status: Status,
-      txtUsername: assignedto,
-      dtActdate: fromdate,
-      dtActenddate: todate,
-    }
-    var header = {}
-
-    axios
-      .post(url, request, header)
-      .then((res) => {
-        console.log(request.dtActenddate)
-        if (res.data)
-          //console.log('g1' + JSON.stringify(res.data))
-          //console.log(request.dtActenddate)
-          alert('added new sprint')
-      })
-      .catch()
-  }
-
+function EditTask() {
   return (
     <div>
       <div className="outer">
@@ -82,7 +25,7 @@ function AddSprint() {
           <div className="outer_column1">
             {/* width:60% */}
             <div>
-              <label className="column1_row1">AddSprint</label>
+              <label className="column1_row1">EditEpic</label>
             </div>
             <div className="column1_row2">
               <button1><GrAttachment/>Attach</button1>
@@ -163,4 +106,4 @@ function AddSprint() {
     </div>
   )
 }
-export default AddSprint
+export default EditTask
