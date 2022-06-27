@@ -125,11 +125,11 @@ button {
   margin: 50px;
   background-color: white;
   width: 100%;
+  flex-direction: row;
   height: 100vh;
 }
 .outer_row1 {
-  display: flex;
-  flex-direction: row;
+  display: flex;;
 }
 .path {
   width: 50%;
@@ -148,8 +148,8 @@ button {
   flex-direction: row;
 }
 .column1_row1 {
-  color: rgb(61, 65, 70);
-  font-size: larger;
+  color: rgb(99, 106, 112);
+  font-size:22px;
   font-weight: 500;
 }
 .outer_column1 {
@@ -221,6 +221,7 @@ select {
   display: flex;
   flex-direction: column;
   margin-bottom: 5%;
+  font-size: large;
 }
 
 textarea {
@@ -231,6 +232,7 @@ textarea {
 .column1_row4 {
   color: slategray;
   margin-bottom: 5%;
+  font-size: large;
 }
 .column1_row5 {
   display: flex;
@@ -263,8 +265,8 @@ button8 {
   border: 0.5px grey;
 }
 button7 {
-  background-color: blue;
-  color: white;
+  background-color: rgb(55, 61, 66); 
+   color: white;
 }
 
 .column1_row6 {
@@ -328,18 +330,23 @@ button7 {
   text-align: left;
   text-indent: 2%;
   width: 100%;
+  font-size: large;
+  color: slategray;
 }
 .column2_row3_1,
 .column2_row3_2 {
   margin-left: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
+  color: slategray;
 }
 .column2_row3_1 {
   margin-right: 20%;
 }
 .list {
-  padding-bottom: 20px;
+  padding-bottom: 87px;
+  font-size:medium;
+  color: slategray;
 }
 .list_A {
   margin-right: 10px;
