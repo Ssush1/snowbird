@@ -1,129 +1,159 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import "./style/styles.css";
-import Menu from "./Menu";
-import { FaAngleDown, FaAngleRight } from "react-icons/fa";
-import { Navigate, useNavigate } from "react-router-dom";
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import './style/styles.css'
+import Menu from './Menu'
+import Header from './Header'
+// import { FaAngleDown, FaAngleRight } from 'react-icons/fa'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { FaSearch } from "react-icons/fa";
+import {
+  BsStar,
+  BsStarFill
+} from "react-icons/bs";
+
+
 function Epic() {
-  const navigate=useNavigate();
-  const [array, setArray] = useState([]);
-  var url = "http://localhost:8000/epicfecth";
-  var request = {};
-  var header = {};
+  const navigate = useNavigate()
+  const [array, setArray] = useState([])
+  var url = 'http://localhost:8000/epicfecth'
+  var request = {}
+  var header = {}
   useEffect(() => {
     axios
       .post(url, request, header)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data)
         for (const element of res.data) {
-          element.isClicked = true;
+          element.isClicked = true
         }
-        setArray(res.data);
+        setArray(res.data)
       })
-      .catch();
-  }, []);
+      .catch()
+  }, [])
 
   const handleClick = (e, index) => {
-    e.preventDefault();
-    var temp = [...array];
-    console.log("temp" + JSON.stringify(temp[index]));
-    temp[index].isClicked = temp[index].isClicked ? false : true;
-    console.log("temp" + JSON.stringify(temp[index]));
-    setArray(temp);
-  };
-function editepic(n)
-{
-  console.log("fetid"+n);
+    e.preventDefault()
+    var temp = [...array]
+    console.log('temp' + JSON.stringify(temp[index]))
+    temp[index].isClicked = temp[index].isClicked ? false : true
+    console.log('temp' + JSON.stringify(temp[index]))
+    setArray(temp)
+  }
+  function editepic(n) {
+    console.log('fetid' + n)
     //setPrjctId(n);
-    localStorage.setItem("EpicId",n);
-  navigate("/editepic")
-}
-function addepic()
-{
-  navigate("/addepic")
-}
+    localStorage.setItem('EpicId', n)
+    navigate('/editepic')
+  }
+  function newep() {
+    navigate('/addepic')
+  }
   return (
     <div>
-      <div className="outer">
-        {/* USer name with icon */}
-        {/* <div className="firstrow">
-          <div className="usericon"></div>
-          <label>User</label>
-        </div> */}
-        <div className="secondrow">
-          {/* Side navigation menu */}
-          {<Menu />}
-
-          {/* Main outline */}
+      <div className="outer"></div>
+      {<Header />}
+      <div className="secondrow">
+      <div className="firstcolumn">
+            <Menu />
+          </div>
           <div className="secondcolumn">
             <div className="prowone">
-              <label>Epic </label>
-              <button onClick={addepic}>Create New</button>
+              <div className="prowone_left">
+                <label>Epics</label>
+              </div>
+              <div className="prowone_right">
+              <button onClick={newep}>Create Epic</button>
+              </div>
             </div>
-            <div className="tablerow">
-              <table>
-                <thead>
-                  <th className="withborder constant"></th>
-                  <th className="withborder constant">id</th>
-                  <th className="withborder">EpicName</th>
-                  <th className="withborder">Status</th>
-                  <th className="withborder">ProjectName</th>
-                </thead>
-                <tbody>
-                  {array.map((item, index) => {
+            <div className="secthirdrow">
+              <div className="searchepic">
+                <input type="text" />
+                <FaSearch />
+              </div>
+            </div>
+      <div className="userlist">
+         {/* <table> 
+          <tr> 
+             {array.map((item, index) => { 
+               return ( 
+                <> 
+                   <tr
+                    onClick={(e) => {
+                      handleClick(e, index)
+                    }}
+                   >
+                    <td>
+                      {item.isClicked ? (
+                        <FaAngleDown
+                          onClick={(e) => handleClick(e, item, index)}
+                        />
+                      ) : (
+                        <FaAngleRight
+                          onClick={(e) => handleClick(e, item, index)}
+                        />
+                      )}
+                    </td>
+
+                    <td
+                      className="constant"
+                      onClick={() => {
+                        editepic(item.id)
+                      }}
+                    >
+                      {item.id}
+                    </td>
+                    <td>{item.txtStatus}</td>
+                    <td>{item.txtName}</td>
+                    <td></td>
+                  </tr>
+                  {item.Task.map((childItem, ChildIndex) => {
                     return (
                       <>
-                        <tr  onClick={(e) => {
-  handleClick(e, index);
-}}
-                          
-                        >
-                          <td>
-                            {item.isClicked? (
-                              <FaAngleDown
-                                onClick={(e) => handleClick(e, item, index)}
-                              />
-                            ) : (
-                              <FaAngleRight
-                                onClick={(e) => handleClick(e, item, index)}
-                              />
-                            )}
-                          </td>
-                         
-                          <td className="constant" onClick={()=>{editepic(item.id)}}>{item.id}</td>
-                          <td>{item.txtStatus}</td>
-                          <td>{item.txtName}</td>
+                        <tr className={item.isClicked ? 'display' : 'none'}>
                           <td></td>
+                           <td></td>
+                          <td className="task">{childItem.txtTitle}</td>
+                          <td className="task">{childItem.txtStatus}</td>
                         </tr>
-                        {item.Task.map((childItem, ChildIndex) => {
-                          return (
-                            <>
-                              <tr
-                                className={item.isClicked ? "display" : "none"}
-                              >
-                                <td></td>
-                                <td></td>
-                                <td className="task">{childItem.txtTitle}</td>
-                                <td className="task">{childItem.txtStatus}</td>
-                              </tr>
-                            </>
-                          );
-                        })}
                       </>
-                    );
+                    )
                   })}
-                </tbody>
-              </table>
-            </div>
-            <div className="pbutton">
-              <button>1</button>
-              <button>2</button>
-              <button>3</button>
-            </div>
-          </div>
+                
+                </>
+              )
+            })}
+            </tr>
+            </table> */}
+            <div className="userlist">
+            <table>
+            <tr> <th>
+                  <BsStarFill />
+                </th>
+            <th>id</th>
+            <th>EpicName</th>
+            <th>Status</th>
+            <th>ProjectName</th>
+            <th></th>
+        </tr>
+         
+            <tr onClick={editepic}> 
+            <td><BsStar /></td> 
+            <td>1</td>
+            <td>Epic1</td>
+            <td>To Do</td>
+            <td>NewProject</td>
+            </tr>  
+            <tr><td><BsStar /></td>
+            <td>1</td>
+            <td>Epic2</td>
+            <td>To Do</td>
+            <td>NewProject</td>
+            </tr>     
+        </table>
         </div>
       </div>
     </div>
-  );
-}
-export default Epic;
+</div>
+</div>
+  )}
+export default Epic

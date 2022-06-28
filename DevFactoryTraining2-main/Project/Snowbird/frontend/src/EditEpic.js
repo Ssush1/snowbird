@@ -101,8 +101,8 @@ function EditEpic() {
               </div>
             </div>
             <div className="column1_row7">
-              <button9 className="row8">Save</button9>
-              <button10 className="row9">Cancel</button10>
+              <button className="row8">Save</button>
+              <button className="row9">Cancel</button>
             </div>
           </div>
           <div className="outer_column2">
@@ -114,18 +114,18 @@ function EditEpic() {
             <div className="column2_row2">Details</div>
             <div className="column2_row3">
             <div className="column2_row3_1">
-              <div className="list">Assignee</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
+              <div className="listt">Assignee</div>
+              <div className="listt">label</div>
+              <div className="listt">label</div>
+              <div className="listt">label</div>
+              <div className="listt">label</div>
             </div>
             <div className="column2_row3_2">
-              <div className="list"><HiOutlineUserCircle/>Unassigned</div>
-              <div className="list">None</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-              <div className="list">
+              <div className="listt"><HiOutlineUserCircle/>Unassigned</div>
+              <div className="listt">None</div>
+              <div className="listt">label</div>
+              <div className="listt">label</div>
+              <div className="listt">
                 <div className="list_A">A</div><div>label</div>
               </div>
             </div>

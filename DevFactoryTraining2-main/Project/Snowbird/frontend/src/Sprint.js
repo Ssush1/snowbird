@@ -3,6 +3,15 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Menu from './Menu'
+import { FaSearch } from "react-icons/fa";
+import {
+  BsChevronDown,
+  BsStar,
+  BsThreeDots,
+  BsStarFill,
+  BsFillCaretDownFill,
+} from "react-icons/bs";
+
 
 
 
@@ -16,7 +25,7 @@ function Sprint() {
   //   { Id: 3, name: 'sprint3', count },
   //   { Id: 4, name: 'sprint4', count },
   //   { Id: 5, name: 'sprint5', count },
-  function handleClick() {
+  function OneClick() {
     navigate('/AddSprint')
   }
   function newClick(e,Id) {
@@ -47,14 +56,15 @@ function Sprint() {
           <div className="usericon"> </div>
           <label>User</label>
         </div> */}
+        {<Header />}
         <div className="secondrow">
           {/* Side navigation menu */}
 
           {<Menu />}
           <div className="secondcolumn">
             <div className="prowone">
-              <label>Sprint</label>
-              <button onClick={handleClick}>Create New</button>
+              <label>Sprints</label>
+              <button onClick={OneClick}>Create New</button>
             </div>
             <table className="tablerow">
               <tr className="report_third">

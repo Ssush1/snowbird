@@ -137,18 +137,18 @@ function AddSprint() {
             <div className="column2_row2">Details</div>
             <div className="column2_row3">
             <div className="column2_row3_1">
-              <div className="list">Assignee</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
+              <div className="listt">Assignee</div>
+              <div className="listt">label</div>
+              <div className="listt">label</div>
+              <div className="listt">label</div>
+              <div className="listt">label</div>
             </div>
             <div className="column2_row3_2">
-              <div className="list"><HiOutlineUserCircle/>Unassigned</div>
-              <div className="list">None</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-              <div className="list">
+              <div className="listt"><HiOutlineUserCircle/>Unassigned</div>
+              <div className="listt">None</div>
+              <div className="listt">label</div>
+              <div className="listt">label</div>
+              <div className="listt">
                 <div className="list_A">A</div><div>label</div>
               </div>
             </div>

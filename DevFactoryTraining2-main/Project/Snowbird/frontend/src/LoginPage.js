@@ -84,7 +84,7 @@ function LoginPage() {
               type="password"
               placeholder="Enter Password"
             />
-            <button onClick={handleclick}>Continue</button>
+            <button className="Loginbutton" onClick={handleclick}>Continue</button>
             <p>{errormessage}</p>
           <label className="roww2">Privacy Policy . User Notice</label>
           <img src={dlogo} className="roww3" />

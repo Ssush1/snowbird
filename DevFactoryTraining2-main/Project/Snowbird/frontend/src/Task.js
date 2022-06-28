@@ -3,6 +3,15 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Menu from './Menu'
+import { FaSearch } from "react-icons/fa";
+import {
+  BsChevronDown,
+  BsStar,
+  BsThreeDots,
+  BsStarFill,
+  BsFillCaretDownFill,
+} from "react-icons/bs";
+
 
 function Task() {
   const navigate = useNavigate()
@@ -39,6 +48,7 @@ function Task() {
           <div className="usericon"> </div>
           <label>User</label>
         </div> */}
+         {<Header />}
         <div className="secondrow">
           {/* Side navigation menu */}
 
