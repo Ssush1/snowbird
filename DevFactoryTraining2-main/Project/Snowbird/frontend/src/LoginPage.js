@@ -2,6 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import "./style/styles.css";
 import { useNavigate } from "react-router-dom";
+import logo_snow from './style/images/logo_snow.png'
+import dlogo from './style//images/dlogo.png'
+import left from './style/images/left.png'
 
 function LoginPage() {
   const [Username, setusername] = useState("");
@@ -55,32 +58,44 @@ function LoginPage() {
   }
 
   return (
-    <div className="login_container">
-      <div className="login_outerdiv">
-        <h2>Login</h2>
-        <div className="login_element">
-          <label>Username</label>
-          <input
-            onChange={(e) => {
-              setusername(e.target.value);
-            }}
-            type="text"
-          />
+    <div>
+      <div className="Oouterdiv">
+        <div className="colmn1">
+          <div>
+            <img src={left} className="image1" />
+          </div>
         </div>
-        <div className="login_element">
-          <label>Password</label>
-          <input
-            onChange={(e) => {
-              setpassword(e.target.value);
-            }}
-            type="password"
-          />
+        <div className="colmn2">
+          <div className="roww1">
+            <img src={logo_snow} className="image2" />
+            <input
+              className="inpuut"
+              onChange={(e) => {
+                setusername(e.target.value)
+              }}
+              type="text"
+              placeholder="Enter Email"
+            />
+            <input
+              className="inpuut"
+              onChange={(e) => {
+                setpassword(e.target.value)
+              }}
+              type="password"
+              placeholder="Enter Password"
+            />
+            <button onClick={handleclick}>Continue</button>
+            <p>{errormessage}</p>
+          <label className="roww2">Privacy Policy . User Notice</label>
+          <img src={dlogo} className="roww3" />
+          <label className="roww4">
+            One account for Jira,Confluence,Trello and more
+          </label>
         </div>
-        <div className="login_element_button">
-        <div style={{display: vsble?"":"none" }} class="lds-ring"><div></div><div></div><div></div><div></div></div>
-          <button style={{display: vsble?"none":"" }} onClick={(e)=>handleclick(e)}>Login</button>
-        </div>{" "}
-        <p className="errormssg">{errormessage}</p>
+        </div>
+        <div className="colmn3">
+          <img src={left} className="image3" />
+        </div>
       </div>
     </div>
   );
