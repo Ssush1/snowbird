@@ -78,23 +78,13 @@ function EditTask() {
             </div>
             <div className="column2_row2">Details</div>
             <div className="column2_row3">
-            <div className="column2_row3_1">
-              <div className="list">Assignee</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-            </div>
-            <div className="column2_row3_2">
-              <div className="list"><HiOutlineUserCircle/>Unassigned</div>
-              <div className="list">None</div>
-              <div className="list">label</div>
-              <div className="list">label</div>
-              <div className="list">
-                <div className="list_A">A</div><div>label</div>
-              </div>
-            </div>
-            </div>
+            
+              <div className="list">Assignee</div><div className="list1"><HiOutlineUserCircle/>Unassigned</div>
+              <div className="list">label</div><div className="list1">None</div>
+              <div className="list">label</div><div className="list1">label</div>
+              <div className="list">label</div><div className="list1">label</div>
+              <div className="list">label</div><div className="list1"><div className="list_A">A</div><div>label</div>
+              </div></div>
             <div className="column3_row1">
             <label>created 9 minutes ago</label>
             <label className="cl3row1"><DiAptana/>Configure</label>
