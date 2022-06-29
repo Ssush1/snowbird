@@ -5,24 +5,27 @@ import Header from "./Header";
 import SprintBox from "./SprintBox";
 import { FaAngleDown, FaFlag, FaPlus, FaRegUserCircle, FaUser, FaUserCircle } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
+import { VscNoNewline } from "react-icons/vsc";
+import { he } from "date-fns/locale";
 function SprintBoard() {
   const [sprintlist, setSprintList] = useState([]);
   const [state, setState] = useState("");
   const [select,setSelect]=useState("");
-  useEffect(() => {
-    var req = {};
-    var header = {};
-    var url = "http://localhost:8000/sprintfetch";
+  const [sid,setSprintId]=useState("");
+  // useEffect(() => {
+  //   var req = {};
+  //   var header = {};
+  //   var url = "http://localhost:8000/sprintfetch";
 
-    axios
-      .post(url, req, header)
-      .then((res) => {
-        console.log(JSON.stringify(res.data));
-        setSprintList(res.data);
-      })
-      .catch();
+  //   axios
+  //     .post(url, req, header)
+  //     .then((res) => {
+  //       console.log(JSON.stringify(res.data));
+  //       setSprintList(res.data);
+  //     })
+  //     .catch();
       
-  }, []);
+  // }, []);
   function selectstyle(){
     if(select=="todo")
     {
@@ -34,7 +37,15 @@ function SprintBoard() {
   };
   function showlist()
   {
+    var url_sprint=" https://c77ywtgadc.execute-api.us-west-2.amazonaws.com/sprintfetch";
+    var header={};
+    console.log("id",sid)
+    var request='{"sprintid":"'+sid+'"}';
+    console.log(JSON.parse(request));
+     axios.post(url_sprint,request,header).then((res)=>{
+      console.log(JSON.stringify(res.data));
 
+     }).catch();
   }
   return (
     <>
@@ -52,17 +63,17 @@ function SprintBoard() {
               <label className="test_sprint">Backlog</label>
             </div>
             <div className="secondcolumn_row3">
-              <select>
+              <select  onChange={(e)=>{setSprintId(e.target.value)}} onClick={showlist}>
                 <option>--Select--</option>
-                <option>Sprint 1</option>
-                <option>Sprint 2</option>
+                <option value={1}>Sprint 1</option>
+                <option value={2}> Sprint 2</option>
               </select>
               {/* <div className="secondcolumn_search">
                 <input type="text" className="secondcolumn_row3_text" />
                 <FaSearch className="fasearch" />
               </div> */}
             </div>
-            <div className="sprint_secondcolumn_row4" onClick={showlist}>
+            <div className="sprint_secondcolumn_row4" >
               <div className="sprintcolumnrow4_top">
                 <div className="sprintcolumnrow4_top_right">
                   <FaAngleDown />
@@ -103,9 +114,11 @@ function SprintBoard() {
                 </div>
                 </div>
                 
+              
            
                        
               </div>
+             
                 <div className="sprint_secondcolumn_row4_createnew">
                    <FaPlus  className="craetenew_icon"/><label>Create issue</label>
                 </div>
@@ -121,7 +134,7 @@ function SprintBoard() {
             </div>
             <div className="sprint_secondcolumn_row5_right">
               <div className="backlog_right">
-            <div className="dot">3</div>
+            <div className="dot">0</div>
             <button > Create Sprint</button>
             </div>
             </div>

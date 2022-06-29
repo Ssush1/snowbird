@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dash from "./Dash";
 import Report from "./Report";
 import AddProject from "./AddProject";
-
+import EditSprint from "./EditSprint";
 import EditProject from "./EditProject";
 import Epic from "./Epic";
 import EditUser from "./EditUser";
@@ -22,6 +22,7 @@ import AddEpic from "./AddEpic";
 import EditTask from "./EditTask";
 import LoginPage from "./LoginPage";
 import Sprint from "./Sprint";
+import JiraList from "./JiraList";
 // import Attendance1 from "./Attendance1";
 
 function Navigation() {
@@ -50,6 +51,7 @@ function Navigation() {
           <Route path="/edituser" element={<EditUser />}></Route>
           <Route path="/adduser" element={<AddUser />}></Route>
           <Route path="/editepic" element={<EditEpic />}></Route>
+          <Route path="/editsprint" element={<EditSprint />}></Route>
           <Route path="/users" element={<Users />}></Route>
           <Route path="/menu" element={<Menu />}></Route>
           {/* <Route path="/attendance" element={<Attendance />}></Route> */}
@@ -60,6 +62,7 @@ function Navigation() {
           <Route path="/addepic" element={<AddEpic/>}></Route>
           <Route path="/edittask" element={<EditTask/>}></Route>
           <Route path="/sprint" element={<Sprint/>}></Route>
+          <Route path="/jiralist" element={<JiraList/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

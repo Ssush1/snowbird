@@ -1,120 +1,54 @@
-import './css/addsprintstyle.css'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import './style/styles.css'
+import axios from 'axios'
+import { useNavigate } from 'react'
+//import "./styles/SnowBirdStyle.css";
 import Menu from './Menu'
-import './styles/SnowBirdStyle.css'
-import { DiAptana } from "react-icons/di";
-import {AiOutlineApartment} from "react-icons/ai";
-import {AiOutlineLink} from "react-icons/ai";
-import { FcBookmark } from "react-icons/fc";
-import { FcFlashOn } from "react-icons/fc";
-import { BiSortDown} from "react-icons/bi";
-import { GrAttachment } from "react-icons/gr";
-import {HiOutlineUserCircle } from "react-icons/hi";
-//import DatePicker from "react-datepicker";
-//import "react-datepicker/dist/react-datepicker.css";
+import { DiAptana } from 'react-icons/di'
+import { AiOutlineApartment } from 'react-icons/ai'
+import { AiOutlineLink } from 'react-icons/ai'
+import { FcBookmark } from 'react-icons/fc'
+import { FcFlashOn } from 'react-icons/fc'
+import { BiSortDown } from 'react-icons/bi'
+import { GrAttachment } from 'react-icons/gr'
+import { FaUserCircle } from 'react-icons/fa'
 
 function EditSprint() {
-  const [options, setOption] = useState([])
-  const [Sprintname, settextSprintname] = useState('')
-  const [Description, setdescription] = useState('')
-  const [Status, setStatus] = useState('')
-  const [assignedto, settxtUserName] = useState([])
-  const [fromdate, setdtActstartdate] = useState('')
-  const [todate, setdtActenddate] = useState('')
-  const [array, setArray] = useState([])
-  const [taskarray, settaskarray] = useState([])
-  const [statarray, setstatarray] = useState([
-    { Id: 1, Status: 'To Do' },
-    { Id: 2, Status: 'In Progress' },
-    { Id: 3, Status: 'Review' },
-    { Id: 4, Status: 'Completed' },
-  ])
-  const [sparray, setsparray] = useState([])
-  const navigate = useNavigate()
-  const [Id, setid] = useState('')
-
+  const [user, setUser] = useState([])
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState([])
+  const [status, setStatus] = useState([])
   useEffect(() => {
-    //localStorage.getItem(Id)
-    var tempid = localStorage.getItem('spid')
-    //console.log(tempid)
-    setid(tempid)
-
-    var url = 'http://localhost:8000/fetchuser'
-    var req = {}
+    var url = 'http://localhost:8000/userfetch'
+    var request = {}
+    var header = {}
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        console.log(res.data)
+        setUser(res.data)
+      })
+      .catch()
+  }, [])
+  function handleClick(e) {
+    console.log('hi')
+    var url = 'http://localhost:8000/Epicinsert'
+    var req = {
+      txtTitle: title,
+      txtDescription: description,
+      txtStatus: status,
+      refassignee: 4,
+    }
     var header = {}
     axios
       .post(url, req, header)
       .then((res) => {
-        setArray(res.data)
+        console.log(res.data)
+        setUser(res.data)
       })
       .catch()
-
-    var url1 = 'http://localhost:8000/sprintdetails'
-    var req1 = { Id: tempid }
-    var header1 = {}
-    axios
-      .post(url1, req1, header1)
-      .then((res) => {
-        //alert('hi')
-        //console.log(JSON.stringify(req1))
-        console.log('response' + JSON.stringify(res.data))
-
-        setsparray(res.data)
-
-        settextSprintname(res.data[0].txtSprintname)
-        setdescription(res.data[0].Description)
-        setStatus(res.data[0].Status)
-        settxtUserName(res.data[0].assignedto)
-        setdtActstartdate(res.data[0].dtActstartdate)
-        setdtActenddate(res.data[0].dtActenddate)
-        console.log('hi' + res.data[0].dtActenddate)
-      })
-      .catch()
-    var url2 = 'http://localhost:8000/fetchsprintwisetasklist'
-    var req2 = { Id: tempid }
-    var header2 = {}
-    axios
-      .post(url2, req2, header2)
-      .then((res) => {
-        // console.log(res)
-        settaskarray(res.data)
-      })
-      .catch()
-  }, [])
-
-  function handleclick() {
-    console.log(fromdate)
-    var url = 'http://localhost:8000/updatesprint'
-    var request = {
-      Id: Id,
-      txtSprintname: Sprintname,
-      Description: Description,
-      dtActdate: fromdate,
-      dtActenddate: todate,
-      Status: Status,
-      txtUsername: assignedto,
-    }
-    // console.log(request)
-    var header = {}
-
-    axios
-      .post(url, request, header)
-      .then((res) => {
-        // console.log('result' + JSON.stringify(res.data))
-        if (res.data !== 'undefined') {
-          alert('updated sprint')
-        }
-      })
-      .catch()
+    alert('Success')
   }
-  function newClick() {
-    navigate('/Task')
-  }
-  // function newClick() {
-  //   navigate('/EditTask')
-  // }
 
   return (
     <div>
@@ -122,7 +56,12 @@ function EditSprint() {
         {/* width:100% */}
         <div className="outer_row1">
           {/* width:50% */}
-          <div className="path"><FcFlashOn/>Test Epic/<FcBookmark/>Test-5</div>
+          <div className="path">
+            <FcFlashOn />
+            Test Epic/
+            <FcBookmark />
+            Test-5
+          </div>
           <div className="closeicon">{/* width:50% */}x</div>
         </div>
         <div className="outer_row2">
@@ -133,15 +72,22 @@ function EditSprint() {
               <label className="column1_row1">EditSprint</label>
             </div>
             <div className="column1_row2">
-              <button className="row2buttons"><GrAttachment/>Attach</button>
-              <button className="row2buttons"><AiOutlineApartment/> Add a child issue</button>
-              <button className="row2buttons"><AiOutlineLink/> Link issue</button>
+              <button className="row2buttons">
+                <GrAttachment />
+                Attach
+              </button>
+              <button className="row2_1buttons">
+                <AiOutlineApartment /> Add a child issue
+              </button>
+              <button className="row2_2buttons">
+                <AiOutlineLink /> Link issue
+              </button>
               <select className="select">
                 <option value=""></option>
               </select>
-              <button className="row2buttons">...</button>
+              <button className="row2_3buttons">...</button>
             </div>
-           <div className="column1_row3">
+            <div className="column1_row3">
               <label>Description</label>
               <textarea
                 rows="10"
@@ -153,7 +99,7 @@ function EditSprint() {
               <label>Activity</label>
             </div>
             <div className="column1_row5">
-            <div className="row5">
+              <div className="row5">
                 <button className="row5buttons">Show</button>
                 <button className="row5buttons">All</button>
                 <button className="row5buttons">Comments</button>
@@ -161,7 +107,9 @@ function EditSprint() {
               </div>
 
               <div className="row5_1">
-                <label>Newest First <BiSortDown/></label>
+                <label>
+                  Newest First <BiSortDown />
+                </label>
               </div>
             </div>
             <div className="column1_row6">
@@ -171,40 +119,56 @@ function EditSprint() {
               </div>
             </div>
             <div className="column1_row7">
-              <button9 className="row8">Save</button9>
-              <button10 className="row9">Cancel</button10>
+              <button className="row8">Save</button>
+              <button className="row9">Cancel</button>
             </div>
           </div>
           <div className="outer_column2">
             <div className="column2_row1">
-              <select className='select1'>
+              <select className="select1">
                 <option value="To Do">To Do</option>
               </select>
             </div>
             <div className="column2_row2">Details</div>
             <div className="column2_row3">
-            <div className="column2_row3_1">
-              <div className="listt">Assignee</div>
-              <div className="listt">label</div>
-              <div className="listt">label</div>
-              <div className="listt">label</div>
-              <div className="listt">label</div>
-            </div>
-            <div className="column2_row3_2">
-              <div className="listt"><HiOutlineUserCircle/>Unassigned</div>
-              <div className="listt">None</div>
-              <div className="listt">label</div>
-              <div className="listt">label</div>
-              <div className="listt">
-                <div className="list_A">A</div><div>label</div>
+              <div className="column2_row3_1">
+                <div className="ght">
+                  <div className="listt">Assignee</div>
+                  <div className="listt1">
+                    <FaUserCircle className="usser" />
+                    Unassigned 
+                  </div>
+                </div>
+                <div className="ght">
+                  <div className="listt">Sprint1</div>
+                  <div className="listt1">None</div>
+                </div>
+                <div className="ght">
+                  <div className="listt">Labels</div>
+                  <div className="listt1">Name</div>
+                </div>
+                <div className="ght">
+                  <div className="listt">Storypoint</div>
+                  <div className="listt1">4</div>
+                </div>
+                <div className="ght">
+                  <div className="listt">Reporter</div>
+                  <div className="listt1">
+                    <div className="list_A">A</div>
+                    <div>Name</div>
+                  </div>
+                </div>
+                <div className="column3_row1">
+                  <label className="cl3row0">created 9 minutes ago</label>
+                  <label className="cl3row1">
+                    <DiAptana />Configure
+                  </label>
+                </div>
+                <div className="column3_row2">
+                  <label className="cl3row0">uploaded 8 minutes ago</label>
+                </div>
               </div>
             </div>
-            </div>
-            <div className="column3_row1">
-            <label>created 9 minutes ago</label>
-            <label className="cl3row1"><DiAptana/>Configure</label>
-            </div>
-            <div className="column3_row2"><label>uploaded 8 minutes ago</label></div>
           </div>
         </div>
       </div>
