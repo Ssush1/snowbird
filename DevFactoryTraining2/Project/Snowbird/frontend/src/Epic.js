@@ -39,7 +39,7 @@ function Epic() {
     console.log('temp' + JSON.stringify(temp[index]))
     setArray(temp)
   }
-  function handleClick(n) {
+  function OneClick(n) {
     console.log('fetid' + n)
     //setPrjctId(n);
     localStorage.setItem('EpicId', n)
@@ -59,7 +59,7 @@ function Epic() {
           <div className="secondcolumn">
             <div className="prowone">
               <div className="prowone_left">
-                <label>Epics</label>
+                <label>Epic</label>
               </div>
               <div className="prowone_right">
               <button onClick={newep}>Create Epic</button>
@@ -136,7 +136,7 @@ function Epic() {
             <th></th>
         </tr>
          
-            <tr onClick={handleClick}> 
+            <tr onClick={OneClick}> 
             <td><BsStar /></td> 
             <td>1</td>
             <td>Epic1</td>
